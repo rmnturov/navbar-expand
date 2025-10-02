@@ -64,7 +64,7 @@ const Sidebar = () => {
           <div className="appswitcher-inner">
             <div className="logo-section">
               <Logo className="logo" />
-              <span className="app-name">MaxPatrol 360</span>
+              <span className="app-name">App Name</span>
             </div>
             <div className="hint-section">
               <KoobiqIcon name="grid-squares" size={16} className="hint-icon" />

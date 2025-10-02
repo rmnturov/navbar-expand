@@ -1,5 +1,15 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+// Параметры таймингов для анимаций сайдбара
+const TIMING_CONFIG = {
+  // Задержка перед разворачиванием меню при наведении (мс)
+  HOVER_EXPAND_DELAY: 300,
+  
+  // Задержка перед сворачиванием меню при уходе курсора (мс)
+  // Значение 0 для мгновенного сворачивания
+  HOVER_COLLAPSE_DELAY: 200
+};
+
 export const useSidebar = () => {
   const [isPinned, setIsPinned] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -101,7 +111,7 @@ export const useSidebar = () => {
     // Устанавливаем задержку для разворачивания меню
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovered(true);
-    }, 200);
+    }, TIMING_CONFIG.HOVER_EXPAND_DELAY);
   }, [isPinned]);
 
   const handleMouseLeave = useCallback(() => {
@@ -114,8 +124,15 @@ export const useSidebar = () => {
       hoverTimeoutRef.current = null;
     }
     
-    // Мгновенное сворачивание
-    setIsHovered(false);
+    // Устанавливаем задержку для сворачивания меню
+    if (TIMING_CONFIG.HOVER_COLLAPSE_DELAY > 0) {
+      leaveTimeoutRef.current = setTimeout(() => {
+        setIsHovered(false);
+      }, TIMING_CONFIG.HOVER_COLLAPSE_DELAY);
+    } else {
+      // Мгновенное сворачивание при задержке = 0
+      setIsHovered(false);
+    }
   }, [isPinned]);
 
   const setActiveMenuItem = useCallback((index) => {

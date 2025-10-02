@@ -14,20 +14,24 @@
   --sidebar-z-index: 1000;
   
   
-  /* Border radius tokens */
-  --sidebar-border-radius-sm: 6px;
-  --sidebar-border-radius-md: 8px;
-  
   /* Animation tokens */
-  --sidebar-transition-duration: 250ms;
+  --sidebar-transition-duration: 200ms;
   --sidebar-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
   --sidebar-transition-fast: 100ms ease;
   
+  /* Text animation tokens */
+  --text-animation-opacity-hidden: 0;
+  --text-animation-opacity-visible: 1;
+  --text-animation-transform-hidden: translateX(-8px);
+  --text-animation-transform-visible: translateX(0);
+  --text-animation-transition: 
+    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  --text-animation-delay: 150ms;
+  
   /* Typography tokens */
-  --sidebar-font-size-sm: 12px;
   --sidebar-font-size-md: 14px;
   --sidebar-font-size-lg: 16px;
-  --sidebar-font-weight-medium: 500;
   --sidebar-font-weight-semibold: 600;
 }
 
@@ -53,7 +57,7 @@
   /* Performance optimizations */
   contain: layout style paint;
   will-change: width;
-  transform: translateZ(0); /* Force hardware acceleration */
+  /* Убираем translateZ(0) с сайдбара, чтобы избежать конфликта с translateX на дочерних элементах */
   
   /* Transitions */
   transition: inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing);
@@ -99,7 +103,7 @@
   display: flex;
   align-items: center;
   height: var(--sidebar-header-height);
-  border-radius: var(--sidebar-border-radius-md);
+  border-radius: 8px;
   color: var(--kbq-foreground-contrast);
   cursor: pointer;
   transition: 
@@ -163,11 +167,9 @@
    ======================================== */
 .app-name,
 .hint-text {
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: 
-    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
-    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
   will-change: opacity, transform;
 }
 
@@ -177,6 +179,11 @@
   color: var(--kbq-foreground-contrast);
   white-space: nowrap;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .hint-section {
@@ -211,8 +218,9 @@
 .sidebar.pinned .app-name,
 .sidebar.hovered .hint-text,
 .sidebar.pinned .hint-text {
-  opacity: 1;
-  transform: translateX(0);
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
 }
 
 /* ========================================
@@ -226,7 +234,7 @@
   /* Активная область кнопки 56×56px */
   inline-size: 0px;
   block-size: 48px;
-  border-radius: var(--sidebar-border-radius-md);
+  border-radius: 8px;
   color: var(--kbq-icon-contrast-fade);
   cursor: pointer;
   transition: 
@@ -306,14 +314,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--sidebar-border-radius-sm);
+  border-radius: 8px;
   transition: background-color var(--sidebar-transition-fast);
 }
 
 .pin-icon,
 .collapse-icon {
   position: absolute;
-  font-size: var(--sidebar-font-size-md);
+  font-size: 16px;
   transition: 
     opacity var(--sidebar-transition-fast),
     transform var(--sidebar-transition-fast);
@@ -345,20 +353,20 @@
 
 /* Custom scrollbar styling */
 .menu-list::-webkit-scrollbar {
-  inline-size: 4px;
+  inline-size: 50%;
 }
 
 .menu-list::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.01);
 }
 
 .menu-list::-webkit-scrollbar-thumb {
-  background: var(--kbq-border-border);
+  background: var(--kbq-scrollbar-thumb-default-background);
   border-radius: 2px;
 }
 
 .menu-list::-webkit-scrollbar-thumb:hover {
-  background: var(--kbq-foreground-muted);
+  background: var(--kbq-scrollbar-thumb-hover-background);
 }
 
 /* ========================================
@@ -381,7 +389,7 @@
   align-items: center;
   inline-size: 100%;
   padding: 0 8px;
-  border-radius: var(--sidebar-border-radius-md);
+  border-radius: 8px;
   color: var(--kbq-foreground-muted);
   cursor: pointer;
   transition: 
@@ -401,7 +409,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  min-inline-size: 0;
   width: 100%;
 }
 
@@ -428,7 +435,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--sidebar-font-size-lg);
+  font-size: 16px;
   flex-shrink: 0;
 }
 
@@ -447,42 +454,30 @@
   text-transform: var(--kbq-typography-text-medium-text-transform);
   font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
   white-space: nowrap;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: 
-    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
-    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
   will-change: opacity, transform;
+  /* Аппаратное ускорение только для текста, без конфликта с родительским translateZ */
+  backface-visibility: hidden;
 }
 
 /* Show menu text when expanded */
 .sidebar.hovered .menu-text,
 .sidebar.pinned .menu-text {
-  opacity: 1;
-  transform: translateX(0);
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
 }
+
+/* Дополнительная оптимизация для плавности анимации убрана - используется переменная --text-animation-delay */
 
 /* ========================================
    Performance Optimizations
    ======================================== */
 
-/* Reduce paint on hover states */
-.menu-link,
-.appswitcher,
-.pin-button-header {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
 
 /* Optimize animations for 60fps */
-@media (prefers-reduced-motion: no-preference) {
-  .sidebar,
-  .app-name,
-  .hint-section,
-  .menu-text {
-    transform: translateZ(0);
-  }
-}
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
