@@ -1,4 +1,6 @@
-/* Импорт иконок Koobiq */
+/* Импорт токенов и иконок Koobiq */
+@import url('../node_modules/@koobiq/design-tokens/web/css-tokens.css');
+@import url('../node_modules/@koobiq/design-tokens/web/css-tokens-light.css');
 @import url('../node_modules/@koobiq/icons/fonts/kbq-icons.css');
 
 /* Сброс стилей и базовые настройки */
