@@ -1,0 +1,90 @@
+/* Основной контент */
+.main-content {
+  flex: 1;
+  min-height: 100vh;
+  background-color: var(--kbq-background-bg);
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 24px;
+  /* Базовый отступ для свернутого сайдбара */
+  margin-left: 56px;
+  color: var(--kbq-foreground-contrast);
+  font-size: var(--kbq-typography-text-normal-font-size);
+  font-weight: var(--kbq-typography-text-normal-font-weight);
+  letter-spacing: var(--kbq-typography-text-normal-letter-spacing);
+  text-transform: var(--kbq-typography-text-normal-text-transform);
+  font-feature-settings: var(--kbq-typography-text-normal-font-feature-settings);
+  line-height: var(--kbq-typography-text-normal-line-height);
+}
+
+/* Состояние при наведении на сайдбар - контент не сдвигается, меню поверх */
+.main-content.hovered:not(.pinned) {
+  /* Отступ остается как в базовом состоянии - 56px */
+  margin-left: 56px;
+}
+
+/* Закрепленное состояние - контент сдвигается под развернутый сайдбар */
+.main-content.pinned {
+  margin-left: 240px !important; /* Приоритет над hover состоянием */
+}
+
+/* Заголовок контента */
+.content-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--kbq-line-contrast-less);
+}
+
+.content-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.content-header p {
+}
+
+/* Секция контента */
+.content-section {
+  max-width: 1200px;
+}
+
+.content-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.content-section p {
+
+  margin-bottom: 24px;
+}
+
+/* Сетка карточек */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+}
+
+/* Карточка контента */
+.content-card {
+  background: var(--kbq-background-card);
+  border-radius: 12px;
+  border: 1px solid var(--kbq-line-contrast-less);
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.content-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.content-card p {
+
+  margin-bottom: 0;
+}
+

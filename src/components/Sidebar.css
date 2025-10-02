@@ -1,0 +1,500 @@
+/**
+ * Sidebar Component Styles
+ * Modern CSS architecture with performance optimizations
+ */
+
+/* ========================================
+   CSS Custom Properties (Design Tokens)
+   ======================================== */
+.sidebar {
+  /* Layout tokens */
+  --sidebar-width-collapsed: 56px;
+  --sidebar-width-expanded: 240px;
+  --sidebar-header-height: var(--sidebar-width-collapsed);
+  --sidebar-z-index: 1000;
+  
+  
+  /* Border radius tokens */
+  --sidebar-border-radius-sm: 6px;
+  --sidebar-border-radius-md: 8px;
+  
+  /* Animation tokens */
+  --sidebar-transition-duration: 250ms;
+  --sidebar-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-transition-fast: 100ms ease;
+  
+  /* Typography tokens */
+  --sidebar-font-size-sm: 12px;
+  --sidebar-font-size-md: 14px;
+  --sidebar-font-size-lg: 16px;
+  --sidebar-font-weight-medium: 500;
+  --sidebar-font-weight-semibold: 600;
+}
+
+/* ========================================
+   Base Sidebar Container
+   ======================================== */
+.sidebar {
+  /* Layout - всегда fixed для стабильности */
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: var(--sidebar-width-collapsed);
+  block-size: 100vh;
+  
+  /* Visual */
+  background-color: var(--kbq-background-bg-tertiary);
+  /* border-inline-end: 1px solid var(--kbq-line-contrast-less); */
+  
+  /* Flexbox */
+  display: flex;
+  flex-direction: column;
+  
+  /* Performance optimizations */
+  contain: layout style paint;
+  will-change: width;
+  transform: translateZ(0); /* Force hardware acceleration */
+  
+  /* Transitions */
+  transition: inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  
+  /* Layering - базовый z-index */
+  z-index: var(--sidebar-z-index);
+  
+  /* Overflow */
+  overflow: hidden;
+}
+
+/* ========================================
+   Sidebar States
+   ======================================== */
+.sidebar.hovered {
+  /* При hover - увеличиваем ширину и z-index для отображения поверх */
+  inline-size: var(--sidebar-width-expanded);
+  z-index: calc(var(--sidebar-z-index) + 1);
+  box-shadow: var(--kbq-shadow-popup);
+}
+
+.sidebar.pinned {
+  /* При pinned - увеличиваем ширину, z-index остается базовым */
+  inline-size: var(--sidebar-width-expanded);
+}
+
+/* ========================================
+   Sidebar Header
+   ======================================== */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-block-size: var(--sidebar-header-height);
+  contain: layout style;
+}
+
+/* ========================================
+   App Switcher Button
+   ======================================== */
+.appswitcher {
+  all: unset;
+  display: flex;
+  align-items: center;
+  height: var(--sidebar-header-height);
+  border-radius: var(--sidebar-border-radius-md);
+  color: var(--kbq-foreground-contrast);
+  cursor: pointer;
+  transition: 
+    background-color var(--sidebar-transition-fast),
+    width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  outline-offset: 2px;
+  padding: 8px 8px 8px 8px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+.appswitcher:hover .appswitcher-inner{
+  background-color: var(--kbq-states-background-transparent-hover);
+}
+
+.appswitcher:hover .logo-section {
+  transform: translateY(-8px);
+  opacity: 0;
+}
+
+.appswitcher:hover .hint-section {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+
+.appswitcher-inner {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+}
+
+
+/* ========================================
+   Logo Section
+   ======================================== */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 4px;
+  transform: translateY(0px);
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.logo {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+
+/* ========================================
+   App Name & Hint Section
+   ======================================== */
+.app-name,
+.hint-text {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: 
+    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  will-change: opacity, transform;
+}
+
+.app-name {
+  font-size: var(--sidebar-font-size-lg);
+  font-weight: var(--sidebar-font-weight-semibold);
+  color: var(--kbq-foreground-contrast);
+  white-space: nowrap;
+  text-align: left;
+}
+
+.hint-section {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  gap: 12px;
+  transform: translateY(8px);
+  opacity: 0;
+  left: 12px;
+  transition: all 0.2s ease;
+}
+
+.hint-icon {
+  font-size: 16px;
+  color: var(--kbq-icon-contrast);
+}
+
+.hint-text {
+  font-size: var(--kbq-typography-text-medium-font-size);
+  font-weight: var(--kbq-typography-text-medium-font-weight);
+  line-height: var(--kbq-typography-text-medium-line-height);
+  letter-spacing: var(--kbq-typography-text-medium-letter-spacing);
+  text-transform: var(--kbq-typography-text-medium-text-transform);
+  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
+  color: var(--kbq-foreground-contrast);
+  white-space: nowrap;
+}
+
+/* Show text when expanded */
+.sidebar.hovered .app-name,
+.sidebar.pinned .app-name,
+.sidebar.hovered .hint-text,
+.sidebar.pinned .hint-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========================================
+   Pin Button
+   ======================================== */
+.pin-button-header {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Активная область кнопки 56×56px */
+  inline-size: 0px;
+  block-size: 48px;
+  border-radius: var(--sidebar-border-radius-md);
+  color: var(--kbq-icon-contrast-fade);
+  cursor: pointer;
+  transition: 
+    background-color var(--sidebar-transition-fast),
+    color var(--sidebar-transition-fast),
+    inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  flex-shrink: 0;
+  /* Добавляем отступы для центрирования контейнера 40×40px */
+  padding: 8px 0px 8px 0px;
+  box-sizing: border-box;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.pin-button-header:hover .icon-container {
+  background-color: var(--kbq-states-background-transparent-hover);
+}
+
+.pin-button-header:hover .icon-container {
+  color: var(--kbq-icon-contrast);
+}
+
+.pin-button-header:focus-visible {
+  outline: none;
+}
+
+.pin-button-header:focus-visible .icon-container {
+  outline: 2px solid var(--kbq-states-line-focus);
+  outline-offset: -1px;
+}
+
+/* Show pin button on hover when sidebar is expanded */
+.sidebar.hovered:hover .pin-button-header,
+.sidebar.pinned:hover .pin-button-header {
+  inline-size: 48px;
+  padding: 8px 8px 8px 0px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Обратная анимация при потере ховера */
+.sidebar.hovered .pin-button-header,
+.sidebar.pinned .pin-button-header {
+  transition: 
+    background-color var(--sidebar-transition-fast),
+    color var(--sidebar-transition-fast),
+    inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+}
+
+/* Adjust appswitcher width when pin button is shown */
+.sidebar.hovered:hover .appswitcher,
+.sidebar.pinned:hover .appswitcher {
+  width: calc(100% - 48px);
+}
+
+/* Обратная анимация для appswitcher при потере ховера */
+.sidebar.hovered .appswitcher,
+.sidebar.pinned .appswitcher {
+  transition: 
+    background-color var(--sidebar-transition-fast),
+    width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+}
+
+
+
+/* ========================================
+   Icon Container & States
+   ======================================== */
+.icon-container {
+  position: relative;
+  /* Контейнер 40×40px по центру активной области */
+  inline-size: 40px;
+  block-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sidebar-border-radius-sm);
+  transition: background-color var(--sidebar-transition-fast);
+}
+
+.pin-icon,
+.collapse-icon {
+  position: absolute;
+  font-size: var(--sidebar-font-size-md);
+  transition: 
+    opacity var(--sidebar-transition-fast),
+    transform var(--sidebar-transition-fast);
+}
+
+.pin-icon.visible,
+.collapse-icon.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pin-icon.hidden,
+.collapse-icon.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* ========================================
+   Menu List
+   ======================================== */
+.menu-list {
+  list-style: none;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  contain: layout style;
+}
+
+/* Custom scrollbar styling */
+.menu-list::-webkit-scrollbar {
+  inline-size: 4px;
+}
+
+.menu-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu-list::-webkit-scrollbar-thumb {
+  background: var(--kbq-border-border);
+  border-radius: 2px;
+}
+
+.menu-list::-webkit-scrollbar-thumb:hover {
+  background: var(--kbq-foreground-muted);
+}
+
+/* ========================================
+   Menu Items
+   ======================================== */
+.menu-item {
+  margin-block-end: 4px;
+}
+
+.menu-item:last-child {
+  margin-block-end: 0;
+}
+
+/* ========================================
+   Menu Links
+   ======================================== */
+.menu-link {
+  all: unset;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  padding: 0 8px;
+  border-radius: var(--sidebar-border-radius-md);
+  color: var(--kbq-foreground-muted);
+  cursor: pointer;
+  transition: 
+    background-color var(--sidebar-transition-fast),
+    color var(--sidebar-transition-fast);
+  contain: layout style;
+  width: 100%;
+  box-sizing: border-box
+}
+
+
+
+.menu-link-inner {
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-inline-size: 0;
+  width: 100%;
+}
+
+.menu-link:hover .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-hover);
+}
+
+.menu-link:active .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-active);
+}
+
+/* Active menu item styles */
+.menu-link.active .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-active);
+}
+
+
+/* ========================================
+   Menu Icons & Text
+   ======================================== */
+.menu-icon {
+  inline-size: 16px;
+  block-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--sidebar-font-size-lg);
+  flex-shrink: 0;
+}
+
+/* Koobiq icons specific styles */
+.koobiq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-text {
+  font-size: var(--kbq-typography-text-medium-font-size);
+  font-weight: var(--kbq-typography-text-medium-font-weight);
+  line-height: var(--kbq-typography-text-medium-line-height);
+  letter-spacing: var(--kbq-typography-text-medium-letter-spacing);
+  text-transform: var(--kbq-typography-text-medium-text-transform);
+  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: 
+    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+  will-change: opacity, transform;
+}
+
+/* Show menu text when expanded */
+.sidebar.hovered .menu-text,
+.sidebar.pinned .menu-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========================================
+   Performance Optimizations
+   ======================================== */
+
+/* Reduce paint on hover states */
+.menu-link,
+.appswitcher,
+.pin-button-header {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Optimize animations for 60fps */
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar,
+  .app-name,
+  .hint-section,
+  .menu-text {
+    transform: translateZ(0);
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .app-name,
+  .hint-section,
+  .menu-text,
+  .pin-icon,
+  .collapse-icon,
+  .menu-link,
+  .appswitcher,
+  .pin-button-header {
+    transition-duration: 0.01ms !important;
+  }
+}

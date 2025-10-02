@@ -1,0 +1,84 @@
+/* Импорт иконок Koobiq */
+@import url('../node_modules/@koobiq/icons/fonts/kbq-icons.css');
+
+/* Сброс стилей и базовые настройки */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--kbq-foreground-contrast);
+  font-family: var(--kbq-typography-text-normal-font-family);
+  background-color: var(--kbq-background-bg);
+  font-size: var(--kbq-typography-text-normal-font-size);
+  font-weight: var(--kbq-typography-text-normal-font-weight);
+  letter-spacing: var(--kbq-typography-text-normal-letter-spacing);
+  text-transform: var(--kbq-typography-text-normal-text-transform);
+  font-feature-settings: var(--kbq-typography-text-normal-font-feature-settings);
+  line-height: var(--kbq-typography-text-normal-line-height);
+}
+
+/* Основной контейнер приложения */
+.app {
+  display: flex;
+  min-height: 100vh;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.app.pinned {
+  /* Дополнительные стили для закрепленного состояния */
+}
+
+
+/* Дополнительные утилиты */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Стили для фокуса (доступность) - только при навигации с клавиатуры */
+button:focus-visible,
+.menu-link:focus-visible {
+  outline: var(--kbq-states-line-focus);
+  outline-offset: 2px;
+}
+
+/* Убираем фокус при клике мышкой */
+button:focus:not(:focus-visible),
+.menu-link:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* Стили для disabled состояний */
+button:disabled {
+  opacity: var(--kbq-states-opacity-disabled);
+}
+
+/* Стили для скроллбара (webkit) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
