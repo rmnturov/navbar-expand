@@ -12,7 +12,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@koobiq/design-tokens": "^3.14.0",
     "@koobiq/icons": "^10.8.0",
