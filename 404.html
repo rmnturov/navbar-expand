@@ -12,7 +12,7 @@
     <script>
       // GitHub Pages SPA redirect
       // This script takes the current URL and redirects to the main app with the path as a query parameter
-      var pathSegmentsToKeep = 1;
+      var pathSegmentsToKeep = 2; // Keep /navbar-expand/ (2 segments)
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
