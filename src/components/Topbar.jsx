@@ -12,7 +12,7 @@ const Topbar = () => {
       <div className="topbar-content">
         {/* Left section - Title */}
         <div className="topbar-left">
-          <div className="topbar-title">{currentSidebar}
+          <div className="topbar-title">Page Title
             <span className="page-title-counter">192</span>
           </div>
         </div>
