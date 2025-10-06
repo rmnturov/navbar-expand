@@ -322,7 +322,7 @@
    Menu Items
    ======================================== */
 .menu-item {
-  margin-block-end: 4px;
+  margin-block-end: 0px;
 }
 
 .menu-item:last-child {
@@ -337,7 +337,7 @@
   display: flex;
   align-items: center;
   inline-size: 100%;
-  padding: 0 8px;
+  padding: 4px 8px;
   border-radius: 8px;
   color: var(--kbq-foreground-muted);
   cursor: pointer;

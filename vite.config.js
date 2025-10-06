@@ -6,7 +6,13 @@ export default defineConfig({
   base: '/navbar-expand/',
   server: {
     port: 3000,
-    open: true
+    open: true,
+    hmr: {
+      overlay: true
+    }
+  },
+  css: {
+    devSourcemap: true
   },
   build: {
     outDir: 'dist',
