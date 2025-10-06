@@ -4,7 +4,7 @@
   min-height: 100vh;
   background-color: var(--kbq-background-bg);
   transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 24px;
+  padding: 0;
   /* Базовый отступ для свернутого сайдбара */
   margin-left: 56px;
   color: var(--kbq-foreground-contrast);
@@ -14,6 +14,8 @@
   text-transform: var(--kbq-typography-text-normal-text-transform);
   font-feature-settings: var(--kbq-typography-text-normal-font-feature-settings);
   line-height: var(--kbq-typography-text-normal-line-height);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Состояние при наведении на сайдбар - контент не сдвигается, меню поверх */
@@ -27,26 +29,21 @@
   margin-left: 240px !important; /* Приоритет над hover состоянием */
 }
 
-/* Заголовок контента */
-.content-header {
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--kbq-line-contrast-less);
+/* Контейнер для основного контента (без топбара) */
+.main-content-wrapper {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
 }
 
-.content-header h1 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  line-height: 1.2;
-}
 
-.content-header p {
-}
+
+
+
 
 /* Секция контента */
 .content-section {
-  max-width: 1200px;
+  width: 100%;
 }
 
 .content-section h2 {
@@ -56,16 +53,15 @@
 }
 
 .content-section p {
-
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 /* Сетка карточек */
 .content-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin: 32px 0;
+  gap: 16px;
+  margin: 24px 0;
 }
 
 /* Карточка контента */
@@ -86,5 +82,71 @@
 .content-card p {
 
   margin-bottom: 0;
+}
+
+/* Навигация между страницами */
+.page-navigation {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.nav-button {
+  padding: 12px 24px;
+  border: 1px solid var(--kbq-line-contrast-less);
+  border-radius: 8px;
+  background: var(--kbq-background-card);
+  color: var(--kbq-foreground-contrast);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+  background: var(--kbq-states-background-transparent-hover);
+  border-color: var(--kbq-line-contrast);
+}
+
+.nav-button.active {
+  background: var(--kbq-states-background-transparent-active);
+  border-color: var(--kbq-line-contrast);
+  color: var(--kbq-foreground-contrast);
+}
+
+/* Описание страницы */
+.page-description {
+  background: var(--kbq-background-card);
+  border-radius: 12px;
+  border: 1px solid var(--kbq-line-contrast-less);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.page-description h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--kbq-foreground-contrast);
+}
+
+.page-description p {
+  margin-bottom: 16px;
+  color: var(--kbq-foreground-muted);
+}
+
+.page-description ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.page-description li {
+  margin-bottom: 8px;
+  color: var(--kbq-foreground-muted);
+}
+
+/* Описание первого сайдбара с ограничением ширины */
+.sidebar-description-old {
+  max-width: 80ch; /* 80 символов */
 }
 

@@ -1,18 +1,17 @@
 /**
- * Sidebar Component Styles
- * Modern CSS architecture with performance optimizations
+ * New Sidebar Component Styles
+ * Based on original Sidebar.css with modifications for new layout
  */
 
 /* ========================================
    CSS Custom Properties (Design Tokens)
    ======================================== */
-.sidebar {
+.new-sidebar {
   /* Layout tokens */
   --sidebar-width-collapsed: 56px;
   --sidebar-width-expanded: 240px;
   --sidebar-header-height: var(--sidebar-width-collapsed);
   --sidebar-z-index: 1000;
-  
   
   /* Animation tokens */
   --sidebar-transition-duration: 200ms;
@@ -36,9 +35,9 @@
 }
 
 /* ========================================
-   Base Sidebar Container
+   Base New Sidebar Container
    ======================================== */
-.sidebar {
+.new-sidebar {
   /* Layout - всегда fixed для стабильности */
   position: fixed;
   inset-block: 0;
@@ -48,7 +47,6 @@
   
   /* Visual */
   background-color: var(--kbq-background-bg-tertiary);
-  /* border-inline-end: 1px solid var(--kbq-line-contrast-less); */
   
   /* Flexbox */
   display: flex;
@@ -57,7 +55,6 @@
   /* Performance optimizations */
   contain: layout style paint;
   will-change: width;
-  /* Убираем translateZ(0) с сайдбара, чтобы избежать конфликта с translateX на дочерних элементах */
   
   /* Transitions */
   transition: inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing);
@@ -70,9 +67,9 @@
 }
 
 /* ========================================
-   Sidebar States
+   New Sidebar States
    ======================================== */
-.sidebar.hovered {
+.new-sidebar.hovered {
   /* При hover - увеличиваем ширину и z-index для отображения поверх */
   inline-size: var(--sidebar-width-expanded);
   z-index: calc(var(--sidebar-z-index) + 1);
@@ -80,83 +77,82 @@
   background-color: var(--kbq-background-card);
 }
 
-.sidebar.pinned {
+.new-sidebar.pinned {
   /* При pinned - увеличиваем ширину, z-index остается базовым */
   inline-size: var(--sidebar-width-expanded);
-  /* background-color: var(--kbq-background); */
-  /* box-shadow: inset -1px 0 0 0 var(--kbq-line-contrast-less); */
 }
 
 /* ========================================
-   Sidebar Header
+   New Sidebar Header
    ======================================== */
-.sidebar-header {
+.new-sidebar-header {
+  display: flex;
+  flex-direction: column;
+  min-block-size: var(--sidebar-header-height);
+  contain: layout style;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   Header Rows
+   ======================================== */
+.header-row-1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-block-size: var(--sidebar-header-height);
-  contain: layout style;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.header-row-2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  padding-left: 4px;
 }
 
 /* ========================================
-   App Switcher Button
+   Grid Button (Left Top Corner)
    ======================================== */
-.appswitcher {
+.grid-button {
   all: unset;
   display: flex;
   align-items: center;
-  height: var(--sidebar-header-height);
+  justify-content: center;
+  inline-size: 40px;
+  block-size: 40px;
   border-radius: 8px;
-  color: var(--kbq-foreground-contrast);
+  color: #000000; /* Черный цвет иконки */
   cursor: pointer;
-  transition: 
-    background-color var(--sidebar-transition-fast),
-    width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
-  outline-offset: 2px;
-  padding: 8px 8px 8px 8px;
-  box-sizing: border-box;
-  width: 100%;
-  overflow: hidden;
+  transition: background-color var(--sidebar-transition-fast);
+  flex-shrink: 0;
 }
 
-.appswitcher:hover .appswitcher-inner{
+.grid-button:hover .icon-container {
   background-color: var(--kbq-states-background-transparent-hover);
 }
 
-.appswitcher:hover .logo-section {
-  transform: translateY(-8px);
-  opacity: 0;
+.grid-button:focus-visible {
+  outline: none;
 }
 
-.appswitcher:hover .hint-section {
-  transform: translateY(0px);
-  opacity: 1;
+.grid-button:focus-visible .icon-container {
+  outline: 2px solid var(--kbq-states-line-focus);
+  outline-offset: -1px;
 }
-
-
-.appswitcher-inner {
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  align-items: center;
-  inline-size: 100%;
-  border-radius: 8px;
-  height: 100%;
-  width: 100%;
-}
-
 
 /* ========================================
-   Logo Section
+   Static Logo Section (No Animation)
    ======================================== */
-.logo-section {
+.logo-section-static {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-left: 4px;
-  transform: translateY(0px);
-  opacity: 1;
-  transition: all 0.2s ease;
+  flex: 1;
+  justify-content: left;
+
 }
 
 .logo {
@@ -165,18 +161,7 @@
   height: 32px;
 }
 
-/* ========================================
-   App Name & Hint Section
-   ======================================== */
-.app-name,
-.hint-text {
-  opacity: var(--text-animation-opacity-hidden);
-  transform: var(--text-animation-transform-hidden);
-  transition: var(--text-animation-transition);
-  will-change: opacity, transform;
-}
-
-.app-name {
+.app-name-static {
   font-size: var(--sidebar-font-size-lg);
   font-weight: var(--sidebar-font-weight-semibold);
   color: var(--kbq-foreground-contrast);
@@ -187,56 +172,31 @@
   max-width: 120px;
   flex-shrink: 1;
   min-width: 0;
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+  will-change: opacity, transform;
 }
 
-.hint-section {
-  display: flex;
-  position: absolute;
-  align-items: center;
-  gap: 12px;
-  transform: translateY(8px);
-  opacity: 0;
-  left: 12px;
-  transition: all 0.2s ease;
-}
-
-.hint-icon {
-  font-size: 16px;
-  color: var(--kbq-icon-contrast);
-}
-
-.hint-text {
-  font-size: var(--kbq-typography-text-medium-font-size);
-  font-weight: var(--kbq-typography-text-medium-font-weight);
-  line-height: var(--kbq-typography-text-medium-line-height);
-  letter-spacing: var(--kbq-typography-text-medium-letter-spacing);
-  text-transform: var(--kbq-typography-text-medium-text-transform);
-  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
-  color: var(--kbq-foreground-contrast);
-  white-space: nowrap;
-}
-
-/* Show text when expanded */
-.sidebar.hovered .app-name,
-.sidebar.pinned .app-name,
-.sidebar.hovered .hint-text,
-.sidebar.pinned .hint-text {
+/* Show logo and name when expanded */
+.new-sidebar.hovered .app-name-static ,
+.new-sidebar.pinned .app-name-static {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
   transition-delay: var(--text-animation-delay);
 }
 
 /* ========================================
-   Pin Button
+   Pin Button (Right Top Corner)
    ======================================== */
 .pin-button-header {
   all: unset;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Активная область кнопки 56×56px */
+  /* Активная область кнопки 40×40px */
   inline-size: 0px;
-  block-size: 48px;
+  block-size: 40px;
   border-radius: 8px;
   color: var(--kbq-icon-contrast-fade);
   cursor: pointer;
@@ -245,8 +205,7 @@
     color var(--sidebar-transition-fast),
     inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing);
   flex-shrink: 0;
-  /* Добавляем отступы для центрирования контейнера 40×40px */
-  padding: 8px 0px 8px 0px;
+  padding: 0;
   box-sizing: border-box;
   overflow: hidden;
   opacity: 0;
@@ -271,17 +230,17 @@
 }
 
 /* Show pin button on hover when sidebar is expanded */
-.sidebar.hovered:hover .pin-button-header,
-.sidebar.pinned:hover .pin-button-header {
-  inline-size: 48px;
-  padding: 8px 8px 8px 0px;
+.new-sidebar.hovered:hover .pin-button-header,
+.new-sidebar.pinned:hover .pin-button-header {
+  inline-size: 40px;
+  padding: 0;
   opacity: 1;
   transform: translateX(0);
 }
 
 /* Обратная анимация при потере ховера */
-.sidebar.hovered .pin-button-header,
-.sidebar.pinned .pin-button-header {
+.new-sidebar.hovered .pin-button-header,
+.new-sidebar.pinned .pin-button-header {
   transition: 
     background-color var(--sidebar-transition-fast),
     color var(--sidebar-transition-fast),
@@ -289,22 +248,6 @@
     opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
     transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
 }
-
-/* Adjust appswitcher width when pin button is shown */
-.sidebar.hovered:hover .appswitcher,
-.sidebar.pinned:hover .appswitcher {
-  width: calc(100% - 48px);
-}
-
-/* Обратная анимация для appswitcher при потере ховера */
-.sidebar.hovered .appswitcher,
-.sidebar.pinned .appswitcher {
-  transition: 
-    background-color var(--sidebar-transition-fast),
-    width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
-}
-
-
 
 /* ========================================
    Icon Container & States
@@ -322,7 +265,8 @@
 }
 
 .pin-icon,
-.collapse-icon {
+.collapse-icon,
+.grid-icon {
   position: absolute;
   font-size: 16px;
   transition: 
@@ -331,13 +275,15 @@
 }
 
 .pin-icon.visible,
-.collapse-icon.visible {
+.collapse-icon.visible,
+.grid-icon.visible {
   opacity: 1;
   transform: scale(1);
 }
 
 .pin-icon.hidden,
-.collapse-icon.hidden {
+.collapse-icon.hidden,
+.grid-icon.hidden {
   opacity: 0;
   transform: scale(0.8);
 }
@@ -403,8 +349,6 @@
   box-sizing: border-box
 }
 
-
-
 .menu-link-inner {
   box-sizing: border-box;
   padding: 10px 12px;
@@ -427,7 +371,6 @@
 .menu-link.active .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-active);
 }
-
 
 /* ========================================
    Menu Icons & Text
@@ -466,32 +409,30 @@
 }
 
 /* Show menu text when expanded */
-.sidebar.hovered .menu-text,
-.sidebar.pinned .menu-text {
+.new-sidebar.hovered .menu-text,
+.new-sidebar.pinned .menu-text {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
   transition-delay: var(--text-animation-delay);
 }
 
-/* Дополнительная оптимизация для плавности анимации убрана - используется переменная --text-animation-delay */
-
 /* ========================================
    Performance Optimizations
    ======================================== */
-
 
 /* Optimize animations for 60fps */
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .sidebar,
-  .app-name,
-  .hint-section,
+  .new-sidebar,
+  .app-name-static,
+  .logo-section-static,
   .menu-text,
   .pin-icon,
   .collapse-icon,
+  .grid-icon,
   .menu-link,
-  .appswitcher,
+  .grid-button,
   .pin-button-header {
     transition-duration: 0.01ms !important;
   }
