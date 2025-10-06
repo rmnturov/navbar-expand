@@ -1,0 +1,89 @@
+/* Topbar Component Styles */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.9);
+  /* box-shadow: 0 1px 0 0 var(--kbq-line-contrast-less); */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.topbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 24px;
+  max-width: 100%;
+}
+
+/* Left section - Title */
+.topbar-left {
+  flex: 1;
+  max-width: 400px;
+}
+
+/* Page Title */
+.topbar-title {
+  display: flex;
+  align-items: center;
+  gap: var(--kbq-size-s);
+  font-size: var(--kbq-typography-title-font-size);
+  font-weight: var(--kbq-typography-title-font-weight);
+  font-family: var(--kbq-font-family-accent);
+  color: var(--kbq-foreground-contrast);
+  line-height: var(--kbq-typography-title-line-height);
+}
+
+.page-title-counter {
+  color: var(--kbq-foreground-contrast-secondary)
+}
+
+/* Right section - Actions and User */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 32px;
+  height: 32px;
+  background-color: var(--kbq-background-contrast);
+  border-radius: var(--kbq-size-border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--kbq-foreground-on-contrast);
+  font-size: var(--kbq-typography-text-medium-font-size);
+  font-weight: var(--kbq-typography-text-medium-font-weight);
+  font-family: var(--kbq-typography-text-medium-font-family);
+  line-height: var(--kbq-typography-text-medium-line-height);
+  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.topbar-button:hover {
+  background-color: var(--kbq-states-background-contrast-hover);
+  transform: translateY(-1px);
+}
+
+.topbar-button:active {
+  background-color: var(--kbq-states-background-contrast-active);
+  border-color: var(--kbq-states-line-contrast-active);
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.topbar-button .kbq {
+  color: var(--kbq-icon-on-contrast);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
