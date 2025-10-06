@@ -92,6 +92,7 @@
 }
 
 .nav-button {
+  display: inline-block;
   padding: 12px 24px;
   border: 1px solid var(--kbq-line-contrast-less);
   border-radius: 8px;
@@ -101,6 +102,8 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-decoration: none;
+  margin-right: 12px;
 }
 
 .nav-button:hover {

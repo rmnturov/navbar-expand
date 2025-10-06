@@ -1,14 +1,12 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useSidebarContext } from '../contexts/SidebarContext';
 import Topbar from './Topbar';
 import './MainContent.css';
 
 const MainContent = ({ onSidebarChange, currentSidebar }) => {
   const { isPinned, isHovered } = useSidebarContext();
-
-  const handlePageChange = (page) => {
-    onSidebarChange(page);
-  };
+  const location = useLocation();
 
   return (
     <main className={`main-content ${isPinned ? 'pinned' : ''} ${isHovered && !isPinned ? 'hovered' : ''}`}>
@@ -19,18 +17,18 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
         <section className="content-section">
         
         <div className="page-navigation">
-          <button 
-            className={`nav-button ${currentSidebar === 'old' ? 'active' : ''}`}
-            onClick={() => handlePageChange('old')}
+          <Link 
+            to="/"
+            className={`nav-button ${location.pathname === '/' ? 'active' : ''}`}
           >
             Сайдбар 1
-          </button>
-          <button 
-            className={`nav-button ${currentSidebar === 'new' ? 'active' : ''}`}
-            onClick={() => handlePageChange('new')}
+          </Link>
+          <Link 
+            to="/bento-visible"
+            className={`nav-button ${location.pathname === '/bento-visible' ? 'active' : ''}`}
           >
             Сайдбар 2
-          </button>
+          </Link>
         </div>
 
         <div className="page-description">
