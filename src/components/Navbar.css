@@ -1,0 +1,476 @@
+/**
+ * Navbar Component Styles
+ * Based on NewSidebar.css with modifications for bottom toggle button
+ */
+
+/* ========================================
+   CSS Custom Properties (Design Tokens)
+   ======================================== */
+.navbar {
+  /* Layout tokens */
+  --navbar-width-collapsed: 56px;
+  --navbar-width-expanded: 240px;
+  --navbar-header-height: var(--navbar-width-collapsed);
+  --navbar-z-index: 1000;
+  
+  /* Animation tokens */
+  --navbar-transition-duration: 200ms;
+  --navbar-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --navbar-transition-fast: 100ms ease;
+  
+  /* Text animation tokens */
+  --text-animation-opacity-hidden: 0;
+  --text-animation-opacity-visible: 1;
+  --text-animation-transform-hidden: translateX(-8px);
+  --text-animation-transform-visible: translateX(0);
+  --text-animation-transition: 
+    opacity var(--navbar-transition-duration) var(--navbar-transition-timing),
+    transform var(--navbar-transition-duration) var(--navbar-transition-timing);
+  --text-animation-delay: 150ms;
+  
+  /* Typography tokens */
+  --navbar-font-size-md: 14px;
+  --navbar-font-size-lg: 16px;
+  --navbar-font-weight-semibold: 600;
+}
+
+/* ========================================
+   Base Navbar Container
+   ======================================== */
+.navbar {
+  /* Layout - всегда fixed для стабильности */
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: var(--navbar-width-collapsed);
+  block-size: 100vh;
+  
+  /* Visual */
+  background-color: var(--kbq-background-bg-tertiary);
+  
+  /* Flexbox */
+  display: flex;
+  flex-direction: column;
+  
+  /* Performance optimizations */
+  contain: layout style paint;
+  will-change: width;
+  
+  /* Transitions */
+  transition: inline-size var(--navbar-transition-duration) var(--navbar-transition-timing);
+  
+  /* Layering - базовый z-index */
+  z-index: var(--navbar-z-index);
+  
+  /* Overflow */
+  overflow: hidden;
+}
+
+/* ========================================
+   Navbar States
+   ======================================== */
+.navbar.hovered {
+  /* При hover - увеличиваем ширину и z-index для отображения поверх */
+  inline-size: var(--navbar-width-expanded);
+  z-index: calc(var(--navbar-z-index) + 1);
+  box-shadow: var(--kbq-shadow-popup);
+  background-color: var(--kbq-background-card);
+}
+
+.navbar.pinned {
+  /* При pinned - увеличиваем ширину, z-index остается базовым */
+  inline-size: var(--navbar-width-expanded);
+}
+
+/* ========================================
+   Navbar Header
+   ======================================== */
+.navbar-header {
+  display: flex;
+  flex-direction: column;
+  min-block-size: var(--navbar-header-height);
+  contain: layout style;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   Header Rows
+   ======================================== */
+.header-row-1 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.header-row-2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  padding-left: 4px;
+}
+
+/* ========================================
+   Grid Button (Left Top Corner)
+   ======================================== */
+.grid-button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: 8px;
+  color: #000000; /* Черный цвет иконки */
+  cursor: pointer;
+  transition: background-color var(--navbar-transition-fast);
+  flex-shrink: 0;
+}
+
+.grid-button:hover .icon-container {
+  background-color: var(--kbq-states-background-transparent-hover);
+}
+
+.grid-button:focus-visible {
+  outline: none;
+}
+
+.grid-button:focus-visible .icon-container {
+  outline: 2px solid var(--kbq-states-line-focus);
+  outline-offset: -1px;
+}
+
+/* ========================================
+   Static Logo Section (No Animation)
+   ======================================== */
+.logo-section-static {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: left;
+}
+
+.logo {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.app-name-static {
+  font-size: var(--navbar-font-size-lg);
+  font-weight: var(--navbar-font-weight-semibold);
+  color: var(--kbq-foreground-contrast);
+  white-space: nowrap;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  flex-shrink: 1;
+  min-width: 0;
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+  will-change: opacity, transform;
+}
+
+/* Show logo and name when expanded */
+.navbar.hovered .app-name-static,
+.navbar.pinned .app-name-static {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
+}
+
+/* ========================================
+   Icon Container & States
+   ======================================== */
+.icon-container {
+  position: relative;
+  /* Контейнер 40×40px по центру активной области */
+  inline-size: 40px;
+  block-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background-color var(--navbar-transition-fast);
+}
+
+.grid-icon {
+  position: absolute;
+  font-size: 16px;
+  transition: 
+    opacity var(--navbar-transition-fast),
+    transform var(--navbar-transition-fast);
+}
+
+.grid-icon.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.grid-icon.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* ========================================
+   Menu List
+   ======================================== */
+.menu-list {
+  list-style: none;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  contain: layout style;
+  padding: 0 8px;
+}
+
+/* Custom scrollbar styling */
+.menu-list::-webkit-scrollbar {
+  inline-size: 50%;
+}
+
+.menu-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.menu-list::-webkit-scrollbar-thumb {
+  background: var(--kbq-scrollbar-thumb-default-background);
+  border-radius: 2px;
+}
+
+.menu-list::-webkit-scrollbar-thumb:hover {
+  background: var(--kbq-scrollbar-thumb-hover-background);
+}
+
+/* ========================================
+   Menu Items
+   ======================================== */
+.menu-item {
+  margin-block-end: 0px;
+}
+
+.menu-item:last-child {
+  margin-block-end: 0;
+}
+
+/* ========================================
+   Menu Links
+   ======================================== */
+.menu-link {
+  all: unset;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: var(--kbq-foreground-muted);
+  cursor: pointer;
+  transition: 
+    background-color var(--navbar-transition-fast),
+    color var(--navbar-transition-fast);
+  contain: layout style;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.menu-link-inner {
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.menu-link:hover .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-hover);
+}
+
+.menu-link:active .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-active);
+}
+
+/* Active menu item styles */
+.menu-link.active .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-active);
+}
+
+/* ========================================
+   Menu Icons & Text
+   ======================================== */
+.menu-icon {
+  inline-size: 16px;
+  block-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* Koobiq icons specific styles */
+.koobiq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-text {
+  font-size: var(--kbq-typography-text-medium-font-size);
+  font-weight: var(--kbq-typography-text-medium-font-weight);
+  line-height: var(--kbq-typography-text-medium-line-height);
+  letter-spacing: var(--kbq-typography-text-medium-letter-spacing);
+  text-transform: var(--kbq-typography-text-medium-text-transform);
+  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
+  white-space: nowrap;
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+  will-change: opacity, transform;
+  /* Аппаратное ускорение только для текста, без конфликта с родительским translateZ */
+  backface-visibility: hidden;
+}
+
+/* Show menu text when expanded */
+.navbar.hovered .menu-text,
+.navbar.pinned .menu-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
+}
+
+/* ========================================
+   Navbar Footer (Bottom Toggle Button)
+   ======================================== */
+.navbar-footer {
+  padding: 8px;
+  border-top: 1px solid var(--kbq-border-divider);
+  background-color: var(--kbq-background-bg-tertiary);
+  flex-shrink: 0;
+}
+
+.toggle-button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: var(--kbq-foreground-muted);
+  cursor: pointer;
+  transition: 
+    background-color var(--navbar-transition-fast),
+    color var(--navbar-transition-fast);
+  contain: layout style;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.toggle-button-inner {
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.toggle-button:hover .toggle-button-inner {
+  background-color: var(--kbq-states-background-transparent-hover);
+}
+
+.toggle-button:active .toggle-button-inner {
+  background-color: var(--kbq-states-background-transparent-active);
+}
+
+.toggle-button:focus-visible {
+  outline: none;
+}
+
+.toggle-button:focus-visible .toggle-button-inner {
+  outline: 2px solid var(--kbq-states-line-focus);
+  outline-offset: -1px;
+}
+
+/* ========================================
+   Toggle Icon & Text
+   ======================================== */
+.toggle-icon-container {
+  position: relative;
+  inline-size: 16px;
+  block-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toggle-icon {
+  position: absolute;
+  font-size: 16px;
+  transition: 
+    opacity var(--navbar-transition-fast),
+    transform var(--navbar-transition-fast);
+}
+
+.toggle-icon.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.toggle-icon.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.toggle-text {
+  font-size: var(--kbq-typography-text-medium-font-size);
+  font-weight: var(--kbq-typography-text-medium-font-weight);
+  line-height: var(--kbq-typography-text-medium-line-height);
+  letter-spacing: var(--kbq-typography-text-medium-letter-spacing);
+  text-transform: var(--kbq-typography-text-medium-text-transform);
+  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
+  white-space: nowrap;
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+/* Show toggle text when expanded */
+.navbar.hovered .toggle-text,
+.navbar.pinned .toggle-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
+}
+
+/* ========================================
+   Performance Optimizations
+   ======================================== */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .app-name-static,
+  .logo-section-static,
+  .menu-text,
+  .toggle-text,
+  .toggle-icon,
+  .grid-icon,
+  .menu-link,
+  .grid-button,
+  .toggle-button {
+    transition-duration: 0.01ms !important;
+  }
+}
