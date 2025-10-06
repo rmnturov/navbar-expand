@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import NewSidebar from './components/NewSidebar';
 import MainContent from './components/MainContent';
@@ -7,10 +8,19 @@ import './App.css';
 
 function AppContent() {
   const { isPinned } = useSidebarContext();
-  const [currentSidebar, setCurrentSidebar] = useState('old');
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Определяем текущий сайдбар на основе URL
+  const currentSidebar = location.pathname === '/bento-visible' ? 'new' : 'old';
 
   const handleSidebarChange = (sidebar) => {
-    setCurrentSidebar(sidebar);
+    // Навигация через URL вместо локального состояния
+    if (sidebar === 'new') {
+      navigate('/bento-visible');
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -23,9 +33,15 @@ function AppContent() {
 
 function App() {
   return (
-    <SidebarProvider>
-      <AppContent />
-    </SidebarProvider>
+    <Router>
+      <SidebarProvider>
+        <Routes>
+          <Route path="/" element={<AppContent />} />
+          <Route path="/bento-visible" element={<AppContent />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </SidebarProvider>
+    </Router>
   );
 }
 

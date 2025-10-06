@@ -37,7 +37,7 @@
 }
 
 .page-title-counter {
-  color: var(--kbq-foreground-contrast-secondary)
+  color: var(--kbq-foreground-contrast-secondary);
 }
 
 /* Right section - Actions and User */
