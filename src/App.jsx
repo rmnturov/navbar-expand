@@ -14,6 +14,15 @@ function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   
+  // Проверяем, есть ли сохраненный путь для редиректа (из 404.html)
+  React.useEffect(() => {
+    const redirectPath = sessionStorage.getItem('redirectPath');
+    if (redirectPath) {
+      sessionStorage.removeItem('redirectPath');
+      navigate(redirectPath, { replace: true });
+    }
+  }, [navigate]);
+  
   // Определяем текущий сайдбар на основе URL
   // Для BrowserRouter используем pathname
   const currentPath = location.pathname;

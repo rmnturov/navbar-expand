@@ -10,15 +10,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <script>
-      // GitHub Pages SPA redirect for HashRouter
-      // Redirect to main app with hash routing
+      // GitHub Pages SPA redirect for BrowserRouter
+      // This script handles 404 errors by redirecting to the main app
+      // and letting React Router handle the routing
       var l = window.location;
-      var path = l.pathname.replace('/navbar-expand/', '');
+      var path = l.pathname.replace('/navbar-expand', '');
+      var search = l.search;
+      var hash = l.hash;
+      
+      // Store the intended path in sessionStorage for React Router
       if (path && path !== '/') {
-        l.replace(l.protocol + '//' + l.host + '/navbar-expand/#' + path);
-      } else {
-        l.replace(l.protocol + '//' + l.host + '/navbar-expand/');
+        sessionStorage.setItem('redirectPath', path + search + hash);
       }
+      
+      // Redirect to main app
+      l.replace(l.protocol + '//' + l.host + '/navbar-expand/');
     </script>
   </head>
   <body class="kbq-light">
