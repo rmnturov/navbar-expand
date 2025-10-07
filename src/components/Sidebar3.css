@@ -1,22 +1,22 @@
 /**
- * Navbar Component Styles
- * Based on NewSidebar.css with modifications for bottom toggle button
+ * Sidebar3 Component Styles
+ * Based on NewSidebar.css with modifications for bottom toggle menu
  */
 
 /* ========================================
    CSS Custom Properties (Design Tokens)
    ======================================== */
-.navbar {
+.sidebar3 {
   /* Layout tokens */
-  --navbar-width-collapsed: 56px;
-  --navbar-width-expanded: 240px;
-  --navbar-header-height: var(--navbar-width-collapsed);
-  --navbar-z-index: 1000;
+  --sidebar-width-collapsed: 56px;
+  --sidebar-width-expanded: 240px;
+  --sidebar-header-height: var(--sidebar-width-collapsed);
+  --sidebar-z-index: 1000;
   
   /* Animation tokens */
-  --navbar-transition-duration: 200ms;
-  --navbar-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
-  --navbar-transition-fast: 100ms ease;
+  --sidebar-transition-duration: 200ms;
+  --sidebar-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-transition-fast: 100ms ease;
   
   /* Text animation tokens */
   --text-animation-opacity-hidden: 0;
@@ -24,25 +24,25 @@
   --text-animation-transform-hidden: translateX(-8px);
   --text-animation-transform-visible: translateX(0);
   --text-animation-transition: 
-    opacity var(--navbar-transition-duration) var(--navbar-transition-timing),
-    transform var(--navbar-transition-duration) var(--navbar-transition-timing);
+    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
   --text-animation-delay: 150ms;
   
   /* Typography tokens */
-  --navbar-font-size-md: 14px;
-  --navbar-font-size-lg: 16px;
-  --navbar-font-weight-semibold: 600;
+  --sidebar-font-size-md: 14px;
+  --sidebar-font-size-lg: 16px;
+  --sidebar-font-weight-semibold: 600;
 }
 
 /* ========================================
-   Base Navbar Container
+   Base Sidebar3 Container
    ======================================== */
-.navbar {
+.sidebar3 {
   /* Layout - всегда fixed для стабильности */
   position: fixed;
   inset-block: 0;
   inset-inline-start: 0;
-  inline-size: var(--navbar-width-collapsed);
+  inline-size: var(--sidebar-width-collapsed);
   block-size: 100vh;
   
   /* Visual */
@@ -57,112 +57,114 @@
   will-change: width;
   
   /* Transitions */
-  transition: inline-size var(--navbar-transition-duration) var(--navbar-transition-timing);
+  transition: inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing);
   
   /* Layering - базовый z-index */
-  z-index: var(--navbar-z-index);
+  z-index: var(--sidebar-z-index);
   
   /* Overflow */
   overflow: hidden;
 }
 
 /* ========================================
-   Navbar States
+   Sidebar3 States
    ======================================== */
-.navbar.hovered {
+.sidebar3.hovered {
   /* При hover - увеличиваем ширину и z-index для отображения поверх */
-  inline-size: var(--navbar-width-expanded);
-  z-index: calc(var(--navbar-z-index) + 1);
+  inline-size: var(--sidebar-width-expanded);
+  z-index: calc(var(--sidebar-z-index) + 1);
   box-shadow: var(--kbq-shadow-popup);
   background-color: var(--kbq-background-card);
 }
 
-.navbar.pinned {
+.sidebar3.pinned {
   /* При pinned - увеличиваем ширину, z-index остается базовым */
-  inline-size: var(--navbar-width-expanded);
+  inline-size: var(--sidebar-width-expanded);
 }
 
 /* ========================================
-   Navbar Header
+   Sidebar3 Header
    ======================================== */
-.navbar-header {
+.sidebar3 .sidebar3-header {
   display: flex;
   flex-direction: column;
-  min-block-size: var(--navbar-header-height);
-  contain: layout style;
-  padding: 8px;
+  /* min-block-size: var(--sidebar-header-height); */
+  contain: layout style; 
   box-sizing: border-box;
 }
 
 /* ========================================
-   Header Rows
+   Header Menu Item
    ======================================== */
-.header-row-1 {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 40px;
-  margin-bottom: 8px;
+.sidebar3 .header-menu-item {
+  margin-bottom: 4px;
 }
 
-.header-row-2 {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 40px;
-  padding-left: 4px;
+.sidebar3 .header-menu-item .menu-item {
+  margin-block-end: 0;
 }
 
 /* ========================================
-   Grid Button (Left Top Corner)
+   Header Row
    ======================================== */
-.grid-button {
-  all: unset;
+.sidebar3 .header-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  inline-size: 40px;
-  block-size: 40px;
-  border-radius: 8px;
-  color: #000000; /* Черный цвет иконки */
-  cursor: pointer;
-  transition: background-color var(--navbar-transition-fast);
-  flex-shrink: 0;
-}
-
-.grid-button:hover .icon-container {
-  background-color: var(--kbq-states-background-transparent-hover);
-}
-
-.grid-button:focus-visible {
-  outline: none;
-}
-
-.grid-button:focus-visible .icon-container {
-  outline: 2px solid var(--kbq-states-line-focus);
-  outline-offset: -1px;
+  justify-content: flex-start;
+  height: 32px;
+  padding-left: 4px;
+  margin-bottom: 12px;
+  margin-top: 0px;
 }
 
 /* ========================================
    Static Logo Section (No Animation)
    ======================================== */
-.logo-section-static {
+.sidebar3 .logo-section-static {
   display: flex;
   align-items: center;
   gap: 12px;
   flex: 1;
   justify-content: left;
+  padding-left: 8px;
 }
 
-.logo {
+.sidebar3 .logo {
   flex-shrink: 0;
   width: 32px;
   height: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.app-name-static {
-  font-size: var(--navbar-font-size-lg);
-  font-weight: var(--navbar-font-weight-semibold);
+/* Logo hover effect - ромбики разъезжаются */
+.sidebar3 .logo:hover .diamond {
+  transition: transform 0.2s ease;
+}
+
+/* Diamond 1 - левый верхний, разъезжается влево и вверх */
+.sidebar3 .logo:hover .diamond-1 {
+  transform: translate(-2px, -2px);
+}
+
+/* Diamond 2 - левый нижний, разъезжается влево и вниз */
+.sidebar3 .logo:hover .diamond-2 {
+  transform: translate(-2px, 2px);
+}
+
+/* Diamond 3 - правый верхний, разъезжается вправо и вверх */
+.sidebar3 .logo:hover .diamond-3 {
+  transform: translate(2px, -2px);
+}
+
+/* Diamond 4 - правый нижний, разъезжается вправо и вниз */
+.sidebar3 .logo:hover .diamond-4 {
+  transform: translate(2px, 2px);
+}
+
+.sidebar3 .app-name-static {
+  font-size: var(--sidebar-font-size-lg);
+  font-weight: var(--sidebar-font-weight-semibold);
   color: var(--kbq-foreground-contrast);
   white-space: nowrap;
   text-align: left;
@@ -178,93 +180,62 @@
 }
 
 /* Show logo and name when expanded */
-.navbar.hovered .app-name-static,
-.navbar.pinned .app-name-static {
+.sidebar3.hovered .app-name-static,
+.sidebar3.pinned .app-name-static {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
   transition-delay: var(--text-animation-delay);
 }
 
 /* ========================================
-   Icon Container & States
-   ======================================== */
-.icon-container {
-  position: relative;
-  /* Контейнер 40×40px по центру активной области */
-  inline-size: 40px;
-  block-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  transition: background-color var(--navbar-transition-fast);
-}
-
-.grid-icon {
-  position: absolute;
-  font-size: 16px;
-  transition: 
-    opacity var(--navbar-transition-fast),
-    transform var(--navbar-transition-fast);
-}
-
-.grid-icon.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.grid-icon.hidden {
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-/* ========================================
    Menu List
    ======================================== */
-.menu-list {
+.sidebar3 .menu-list {
   list-style: none;
   margin: 0;
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   contain: layout style;
-  padding: 0 8px;
 }
 
 /* Custom scrollbar styling */
-.menu-list::-webkit-scrollbar {
+.sidebar3 .menu-list::-webkit-scrollbar {
   inline-size: 50%;
 }
 
-.menu-list::-webkit-scrollbar-track {
+.sidebar3 .menu-list::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.01);
 }
 
-.menu-list::-webkit-scrollbar-thumb {
+.sidebar3 .menu-list::-webkit-scrollbar-thumb {
   background: var(--kbq-scrollbar-thumb-default-background);
   border-radius: 2px;
 }
 
-.menu-list::-webkit-scrollbar-thumb:hover {
+.sidebar3 .menu-list::-webkit-scrollbar-thumb:hover {
   background: var(--kbq-scrollbar-thumb-hover-background);
 }
 
 /* ========================================
    Menu Items
    ======================================== */
-.menu-item {
+.sidebar3 .menu-item {
   margin-block-end: 0px;
 }
 
-.menu-item:last-child {
+.sidebar3 .menu-item:last-child {
   margin-block-end: 0;
+}
+
+.sidebar3 .all-apps-menu {
+  padding-top: 8px !important;
 }
 
 /* ========================================
    Menu Links
    ======================================== */
-.menu-link {
-  all: unset;
+.sidebar3 .menu-link {
   display: flex;
   align-items: center;
   inline-size: 100%;
@@ -273,14 +244,14 @@
   color: var(--kbq-foreground-muted);
   cursor: pointer;
   transition: 
-    background-color var(--navbar-transition-fast),
-    color var(--navbar-transition-fast);
+    background-color var(--sidebar-transition-fast),
+    color var(--sidebar-transition-fast);
   contain: layout style;
   width: 100%;
   box-sizing: border-box;
 }
 
-.menu-link-inner {
+.sidebar3 .menu-link-inner {
   box-sizing: border-box;
   padding: 10px 12px;
   border-radius: 8px;
@@ -290,23 +261,23 @@
   width: 100%;
 }
 
-.menu-link:hover .menu-link-inner {
+.sidebar3 .menu-link:hover .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-hover);
 }
 
-.menu-link:active .menu-link-inner {
+.sidebar3 .menu-link:active .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-active);
 }
 
 /* Active menu item styles */
-.menu-link.active .menu-link-inner {
+.sidebar3 .menu-link.active .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-active);
 }
 
 /* ========================================
    Menu Icons & Text
    ======================================== */
-.menu-icon {
+.sidebar3 .menu-icon {
   inline-size: 16px;
   block-size: 16px;
   display: flex;
@@ -317,13 +288,13 @@
 }
 
 /* Koobiq icons specific styles */
-.koobiq-icon {
+.sidebar3 .koobiq-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.menu-text {
+.sidebar3 .menu-text {
   font-size: var(--kbq-typography-text-medium-font-size);
   font-weight: var(--kbq-typography-text-medium-font-weight);
   line-height: var(--kbq-typography-text-medium-line-height);
@@ -340,25 +311,90 @@
 }
 
 /* Show menu text when expanded */
-.navbar.hovered .menu-text,
-.navbar.pinned .menu-text {
+.sidebar3.hovered .menu-text,
+.sidebar3.pinned .menu-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
+}
+
+/* Header menu item text should also be visible when expanded */
+.sidebar3.hovered .header-menu-item .menu-text,
+.sidebar3.pinned .header-menu-item .menu-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
+}
+
+/* Bottom menu text should always be visible when sidebar is expanded */
+.sidebar3.hovered .bottom-menu .menu-text,
+.sidebar3.pinned .bottom-menu .menu-text {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
   transition-delay: var(--text-animation-delay);
 }
 
 /* ========================================
-   Navbar Footer (Bottom Toggle Button)
+   Bottom Menu Section
    ======================================== */
-.navbar-footer {
-  padding: 8px;
-  border-top: 1px solid var(--kbq-border-divider);
-  background-color: var(--kbq-background-bg-tertiary);
+.sidebar3 .bottom-menu {
+  margin-top: auto;
+  
+  /* Убеждаемся, что bottom-menu всегда виден */
+  display: flex;
+  flex-direction: column;
+  /* Минимальная высота для видимости */
   flex-shrink: 0;
+  padding-bottom: 8px;
 }
 
-.toggle-button {
-  all: unset;
+.sidebar3 .bottom-menu .menu-item {
+  margin-block-end: 0;
+}
+
+.sidebar3 .bottom-menu .menu-link {
+  /* Специальные стили для кнопки toggle внизу */
+  color: var(--kbq-foreground-muted);
+}
+
+.sidebar3 .bottom-menu .menu-link:hover .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-hover);
+}
+
+.sidebar3 .bottom-menu .menu-link:active .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-active);
+}
+
+/* Bottom menu should be visible even when sidebar is collapsed */
+.sidebar3:not(.hovered):not(.pinned) .bottom-menu {
+  /* Показываем bottom-menu даже когда сайдбар свернут */
+  display: flex;
+}
+
+.sidebar3:not(.hovered):not(.pinned) .bottom-menu .menu-text {
+  /* Скрываем текст когда сайдбар свернут */
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+}
+
+/* ========================================
+   Bottom Menu List
+   ======================================== */
+.sidebar3-bottom-menu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sidebar3-bottom-menu-list .menu-item {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar3-bottom-menu-list .menu-link {
   display: flex;
   align-items: center;
   inline-size: 100%;
@@ -367,14 +403,14 @@
   color: var(--kbq-foreground-muted);
   cursor: pointer;
   transition: 
-    background-color var(--navbar-transition-fast),
-    color var(--navbar-transition-fast);
+    background-color var(--sidebar-transition-fast),
+    color var(--sidebar-transition-fast);
   contain: layout style;
   width: 100%;
   box-sizing: border-box;
 }
 
-.toggle-button-inner {
+.sidebar3-bottom-menu-list .menu-link-inner {
   box-sizing: border-box;
   padding: 10px 12px;
   border-radius: 8px;
@@ -384,55 +420,35 @@
   width: 100%;
 }
 
-.toggle-button:hover .toggle-button-inner {
+.sidebar3-bottom-menu-list .menu-link:hover .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-hover);
 }
 
-.toggle-button:active .toggle-button-inner {
+.sidebar3-bottom-menu-list .menu-link:active .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-active);
 }
 
-.toggle-button:focus-visible {
-  outline: none;
+.sidebar3-bottom-menu-list .menu-link.active .menu-link-inner {
+  background-color: var(--kbq-states-background-transparent-active);
 }
 
-.toggle-button:focus-visible .toggle-button-inner {
-  outline: 2px solid var(--kbq-states-line-focus);
-  outline-offset: -1px;
-}
-
-/* ========================================
-   Toggle Icon & Text
-   ======================================== */
-.toggle-icon-container {
-  position: relative;
+.sidebar3-bottom-menu-list .menu-icon {
   inline-size: 16px;
   block-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
   flex-shrink: 0;
 }
 
-.toggle-icon {
-  position: absolute;
-  font-size: 16px;
-  transition: 
-    opacity var(--navbar-transition-fast),
-    transform var(--navbar-transition-fast);
+.sidebar3-bottom-menu-list .koobiq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.toggle-icon.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.toggle-icon.hidden {
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-.toggle-text {
+.sidebar3-bottom-menu-list .menu-text {
   font-size: var(--kbq-typography-text-medium-font-size);
   font-weight: var(--kbq-typography-text-medium-font-weight);
   line-height: var(--kbq-typography-text-medium-line-height);
@@ -447,9 +463,9 @@
   backface-visibility: hidden;
 }
 
-/* Show toggle text when expanded */
-.navbar.hovered .toggle-text,
-.navbar.pinned .toggle-text {
+/* Show menu text when expanded */
+.sidebar3.hovered .sidebar3-bottom-menu-list .menu-text,
+.sidebar3.pinned .sidebar3-bottom-menu-list .menu-text {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
   transition-delay: var(--text-animation-delay);
@@ -459,18 +475,15 @@
    Performance Optimizations
    ======================================== */
 
+/* Optimize animations for 60fps */
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .navbar,
-  .app-name-static,
-  .logo-section-static,
-  .menu-text,
-  .toggle-text,
-  .toggle-icon,
-  .grid-icon,
-  .menu-link,
-  .grid-button,
-  .toggle-button {
+  .sidebar3,
+  .sidebar3 .app-name-static,
+  .sidebar3 .logo-section-static,
+  .sidebar3 .menu-text,
+  .sidebar3 .menu-link {
     transition-duration: 0.01ms !important;
   }
 }

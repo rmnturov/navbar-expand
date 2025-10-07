@@ -74,7 +74,6 @@
   inline-size: var(--sidebar-width-expanded);
   z-index: calc(var(--sidebar-z-index) + 1);
   box-shadow: var(--kbq-shadow-popup);
-  background-color: var(--kbq-background-card);
 }
 
 .new-sidebar.pinned {
@@ -85,7 +84,7 @@
 /* ========================================
    New Sidebar Header
    ======================================== */
-.new-sidebar-header {
+.new-sidebar .new-sidebar-header {
   display: flex;
   flex-direction: column;
   min-block-size: var(--sidebar-header-height);
@@ -97,15 +96,15 @@
 /* ========================================
    Header Rows
    ======================================== */
-.header-row-1 {
+.new-sidebar .header-row-1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 40px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
-.header-row-2 {
+.new-sidebar .header-row-2 {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -116,7 +115,7 @@
 /* ========================================
    Grid Button (Left Top Corner)
    ======================================== */
-.grid-button {
+.new-sidebar .grid-button {
   all: unset;
   display: flex;
   align-items: center;
@@ -130,15 +129,15 @@
   flex-shrink: 0;
 }
 
-.grid-button:hover .icon-container {
+.new-sidebar .grid-button:hover .icon-container {
   background-color: var(--kbq-states-background-transparent-hover);
 }
 
-.grid-button:focus-visible {
+.new-sidebar .grid-button:focus-visible {
   outline: none;
 }
 
-.grid-button:focus-visible .icon-container {
+.new-sidebar .grid-button:focus-visible .icon-container {
   outline: 2px solid var(--kbq-states-line-focus);
   outline-offset: -1px;
 }
@@ -146,22 +145,23 @@
 /* ========================================
    Static Logo Section (No Animation)
    ======================================== */
-.logo-section-static {
+.new-sidebar .logo-section-static {
   display: flex;
   align-items: center;
   gap: 12px;
   flex: 1;
   justify-content: left;
+  padding-left: 0;
 
 }
 
-.logo {
+.new-sidebar .logo {
   flex-shrink: 0;
   width: 32px;
   height: 32px;
 }
 
-.app-name-static {
+.new-sidebar .app-name-static {
   font-size: var(--sidebar-font-size-lg);
   font-weight: var(--sidebar-font-weight-semibold);
   color: var(--kbq-foreground-contrast);
@@ -189,7 +189,7 @@
 /* ========================================
    Pin Button (Right Top Corner)
    ======================================== */
-.pin-button-header {
+.new-sidebar .pin-button-header {
   all: unset;
   display: flex;
   align-items: center;
@@ -212,19 +212,19 @@
   transform: translateX(10px);
 }
 
-.pin-button-header:hover .icon-container {
+.new-sidebar .pin-button-header:hover .icon-container {
   background-color: var(--kbq-states-background-transparent-hover);
 }
 
-.pin-button-header:hover .icon-container {
+.new-sidebar .pin-button-header:hover .icon-container {
   color: var(--kbq-icon-contrast);
 }
 
-.pin-button-header:focus-visible {
+.new-sidebar .pin-button-header:focus-visible {
   outline: none;
 }
 
-.pin-button-header:focus-visible .icon-container {
+.new-sidebar .pin-button-header:focus-visible .icon-container {
   outline: 2px solid var(--kbq-states-line-focus);
   outline-offset: -1px;
 }
@@ -252,7 +252,7 @@
 /* ========================================
    Icon Container & States
    ======================================== */
-.icon-container {
+.new-sidebar .icon-container {
   position: relative;
   /* Контейнер 40×40px по центру активной области */
   inline-size: 40px;
@@ -264,9 +264,9 @@
   transition: background-color var(--sidebar-transition-fast);
 }
 
-.pin-icon,
-.collapse-icon,
-.grid-icon {
+.new-sidebar .pin-icon,
+.new-sidebar .collapse-icon,
+.new-sidebar .grid-icon {
   position: absolute;
   font-size: 16px;
   transition: 
@@ -274,16 +274,16 @@
     transform var(--sidebar-transition-fast);
 }
 
-.pin-icon.visible,
-.collapse-icon.visible,
-.grid-icon.visible {
+.new-sidebar .pin-icon.visible,
+.new-sidebar .collapse-icon.visible,
+.new-sidebar .grid-icon.visible {
   opacity: 1;
   transform: scale(1);
 }
 
-.pin-icon.hidden,
-.collapse-icon.hidden,
-.grid-icon.hidden {
+.new-sidebar .pin-icon.hidden,
+.new-sidebar .collapse-icon.hidden,
+.new-sidebar .grid-icon.hidden {
   opacity: 0;
   transform: scale(0.8);
 }
@@ -291,7 +291,7 @@
 /* ========================================
    Menu List
    ======================================== */
-.menu-list {
+.new-sidebar .menu-list {
   list-style: none;
   margin: 0;
   flex: 1;
@@ -301,38 +301,38 @@
 }
 
 /* Custom scrollbar styling */
-.menu-list::-webkit-scrollbar {
+.new-sidebar .menu-list::-webkit-scrollbar {
   inline-size: 50%;
 }
 
-.menu-list::-webkit-scrollbar-track {
+.new-sidebar .menu-list::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.01);
 }
 
-.menu-list::-webkit-scrollbar-thumb {
+.new-sidebar .menu-list::-webkit-scrollbar-thumb {
   background: var(--kbq-scrollbar-thumb-default-background);
   border-radius: 2px;
 }
 
-.menu-list::-webkit-scrollbar-thumb:hover {
+.new-sidebar .menu-list::-webkit-scrollbar-thumb:hover {
   background: var(--kbq-scrollbar-thumb-hover-background);
 }
 
 /* ========================================
    Menu Items
    ======================================== */
-.menu-item {
+.new-sidebar .menu-item {
   margin-block-end: 0px;
 }
 
-.menu-item:last-child {
+.new-sidebar .menu-item:last-child {
   margin-block-end: 0;
 }
 
 /* ========================================
    Menu Links
    ======================================== */
-.menu-link {
+.new-sidebar .menu-link {
   all: unset;
   display: flex;
   align-items: center;
@@ -349,7 +349,7 @@
   box-sizing: border-box
 }
 
-.menu-link-inner {
+.new-sidebar .menu-link-inner {
   box-sizing: border-box;
   padding: 10px 12px;
   border-radius: 8px;
@@ -359,23 +359,23 @@
   width: 100%;
 }
 
-.menu-link:hover .menu-link-inner {
+.new-sidebar .menu-link:hover .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-hover);
 }
 
-.menu-link:active .menu-link-inner {
+.new-sidebar .menu-link:active .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-active);
 }
 
 /* Active menu item styles */
-.menu-link.active .menu-link-inner {
+.new-sidebar .menu-link.active .menu-link-inner {
   background-color: var(--kbq-states-background-transparent-active);
 }
 
 /* ========================================
    Menu Icons & Text
    ======================================== */
-.menu-icon {
+.new-sidebar .menu-icon {
   inline-size: 16px;
   block-size: 16px;
   display: flex;
@@ -386,13 +386,13 @@
 }
 
 /* Koobiq icons specific styles */
-.koobiq-icon {
+.new-sidebar .koobiq-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.menu-text {
+.new-sidebar .menu-text {
   font-size: var(--kbq-typography-text-medium-font-size);
   font-weight: var(--kbq-typography-text-medium-font-weight);
   line-height: var(--kbq-typography-text-medium-line-height);
@@ -425,15 +425,81 @@
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .new-sidebar,
-  .app-name-static,
-  .logo-section-static,
-  .menu-text,
-  .pin-icon,
-  .collapse-icon,
-  .grid-icon,
-  .menu-link,
-  .grid-button,
-  .pin-button-header {
+  .new-sidebar .app-name-static,
+  .new-sidebar .logo-section-static,
+  .new-sidebar .menu-text,
+  .new-sidebar .pin-icon,
+  .new-sidebar .collapse-icon,
+  .new-sidebar .grid-icon,
+  .new-sidebar .menu-link,
+  .new-sidebar .grid-button,
+  .new-sidebar .pin-button-header {
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ========================================
+   Bottom Menu List
+   ======================================== */
+.new-sidebar-bottom-menu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 8px;
+}
+
+.new-sidebar-bottom-menu-list .menu-item {
+  margin: 0;
+  padding: 0;
+}
+
+.new-sidebar-bottom-menu-list .menu-link {
+  
+}
+
+.new-sidebar-bottom-menu-list .menu-link:hover {
+  
+}
+
+.new-sidebar-bottom-menu-list .menu-link.active {
+  
+}
+
+.new-sidebar-bottom-menu-list .menu-link-inner {
+  
+}
+
+.new-sidebar-bottom-menu-list .menu-icon {
+
+}
+
+.new-sidebar-bottom-menu-list .menu-link:hover .menu-icon,
+.new-sidebar-bottom-menu-list .menu-link.active .menu-icon {
+  color: var(--kbq-text-text-primary);
+}
+
+.new-sidebar-bottom-menu-list .menu-text {
+  font-size: var(--kbq-typography-text-medium-font-size);
+  font-weight: var(--kbq-typography-text-medium-font-weight);
+  line-height: var(--kbq-typography-text-medium-line-height);
+  letter-spacing: var(--kbq-typography-text-medium-letter-spacing);
+  text-transform: var(--kbq-typography-text-medium-text-transform);
+  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
+  white-space: nowrap;
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+/* Show menu text when expanded */
+.new-sidebar.hovered .new-sidebar-bottom-menu-list .menu-text,
+.new-sidebar.pinned .new-sidebar-bottom-menu-list .menu-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
 }

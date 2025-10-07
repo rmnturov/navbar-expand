@@ -240,17 +240,19 @@
   border-radius: 8px;
   color: var(--kbq-icon-contrast-fade);
   cursor: pointer;
+  transform: translateX(0px);
   transition: 
     background-color var(--sidebar-transition-fast),
     color var(--sidebar-transition-fast),
-    inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing) 1s,
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing) 1s;
   flex-shrink: 0;
   /* Добавляем отступы для центрирования контейнера 40×40px */
   padding: 8px 0px 8px 0px;
   box-sizing: border-box;
   overflow: hidden;
   opacity: 0;
-  transform: translateX(10px);
+  
 }
 
 .pin-button-header:hover .icon-container {
@@ -277,6 +279,12 @@
   padding: 8px 8px 8px 0px;
   opacity: 1;
   transform: translateX(0);
+  transition: 
+    background-color var(--sidebar-transition-fast),
+    color var(--sidebar-transition-fast),
+    inline-size var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    opacity var(--sidebar-transition-duration) var(--sidebar-transition-timing),
+    transform var(--sidebar-transition-duration) var(--sidebar-transition-timing);
 }
 
 /* Обратная анимация при потере ховера */
@@ -299,9 +307,9 @@
 /* Обратная анимация для appswitcher при потере ховера */
 .sidebar.hovered .appswitcher,
 .sidebar.pinned .appswitcher {
-  transition: 
+  /* transition: 
     background-color var(--sidebar-transition-fast),
-    width var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+    width var(--sidebar-transition-duration) var(--sidebar-transition-timing); */
 }
 
 
@@ -478,6 +486,74 @@
 }
 
 /* Дополнительная оптимизация для плавности анимации убрана - используется переменная --text-animation-delay */
+
+/* ========================================
+   Bottom Menu List
+   ======================================== */
+.sidebar-bottom-menu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 8px;
+}
+
+.sidebar-bottom-menu-list .menu-item {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-bottom-menu-list .menu-link {
+
+}
+
+.sidebar-bottom-menu-list .menu-link:hover {
+
+}
+
+.sidebar-bottom-menu-list .menu-link.active {
+
+}
+
+.sidebar-bottom-menu-list .menu-link-inner {
+
+}
+
+.sidebar-bottom-menu-list .menu-icon {
+  flex-shrink: 0;
+  color: var(--kbq-text-text-secondary);
+  transition: color var(--sidebar-transition-duration) var(--sidebar-transition-timing);
+}
+
+.sidebar-bottom-menu-list .menu-link:hover .menu-icon,
+.sidebar-bottom-menu-list .menu-link.active .menu-icon {
+  color: var(--kbq-text-text-primary);
+}
+
+.sidebar-bottom-menu-list .menu-text {
+  font-size: var(--kbq-typography-text-medium-font-size);
+  font-weight: var(--kbq-typography-text-medium-font-weight);
+  line-height: var(--kbq-typography-text-medium-line-height);
+  letter-spacing: var(--kbq-typography-text-medium-letter-spacing);
+  text-transform: var(--kbq-typography-text-medium-text-transform);
+  font-feature-settings: var(--kbq-typography-text-medium-font-feature-settings);
+  white-space: nowrap;
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+/* Show menu text when expanded */
+.sidebar.hovered .sidebar-bottom-menu-list .menu-text,
+.sidebar.pinned .sidebar-bottom-menu-list .menu-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+  transition-delay: var(--text-animation-delay);
+}
 
 /* ========================================
    Performance Optimizations
