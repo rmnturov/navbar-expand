@@ -310,7 +310,7 @@
   backface-visibility: hidden;
 }
 
-/* Show menu text when expanded */
+/* Show menu text when expanded - для обычных пунктов меню */
 .sidebar3.hovered .menu-text,
 .sidebar3.pinned .menu-text {
   opacity: var(--text-animation-opacity-visible);
@@ -318,9 +318,21 @@
   transition-delay: var(--text-animation-delay);
 }
 
-/* Header menu item text should also be visible when expanded */
-.sidebar3.hovered .header-menu-item .menu-text,
-.sidebar3.pinned .header-menu-item .menu-text {
+/* Hide "Все приложения" text when pinned (expanded state) */
+.sidebar3.pinned .all-apps-menu .menu-text {
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+}
+
+/* Show "Все приложения" text on hover when pinned */
+.sidebar3.pinned .all-apps-menu:hover .menu-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
+}
+
+/* Header menu item text should also be visible when expanded (but not for all-apps) */
+.sidebar3.hovered .header-menu-item .menu-text {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
   transition-delay: var(--text-animation-delay);

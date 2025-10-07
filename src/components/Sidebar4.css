@@ -158,7 +158,7 @@
   will-change: opacity, transform;
 }
 
-/* Show logo and name only when pinned (not on hover) */
+/* Show app name when pinned (expanded state) */
 .sidebar4.pinned .app-name-static {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
@@ -288,11 +288,24 @@
   backface-visibility: hidden;
 }
 
-/* Show menu text only when pinned (not on hover) */
+/* Show menu text when pinned (expanded state) - для обычных пунктов меню */
 .sidebar4.pinned .menu-text {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);
   transition: none; /* Убираем анимацию для hover */
+}
+
+/* Hide "Все приложения" text when pinned (expanded state) */
+.sidebar4.pinned .all-apps-menu .menu-text {
+  opacity: var(--text-animation-opacity-hidden);
+  transform: var(--text-animation-transform-hidden);
+  transition: var(--text-animation-transition);
+}
+
+/* Show "Все приложения" text on hover when pinned */
+.sidebar4.pinned .all-apps-menu:hover .menu-text {
+  opacity: var(--text-animation-opacity-visible);
+  transform: var(--text-animation-transform-visible);
 }
 
 /* ========================================
@@ -518,7 +531,7 @@
   backface-visibility: hidden;
 }
 
-/* Show menu text when expanded - НО НЕ для нижних пунктов меню в свернутом состоянии */
+/* Show menu text when expanded - для нижних пунктов меню */
 .sidebar4.pinned .sidebar4-bottom-menu-list .menu-text {
   opacity: var(--text-animation-opacity-visible);
   transform: var(--text-animation-transform-visible);

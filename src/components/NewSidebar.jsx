@@ -35,6 +35,7 @@ const NewSidebar = () => {
           <button className="grid-button">
             <div className="icon-container">
               <KoobiqIcon name="grid-squares" size={16} className="grid-icon" />
+              <span className="grid-text">Все приложения</span>
             </div>
           </button>
 
