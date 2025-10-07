@@ -26,14 +26,14 @@ function AppContent() {
   // Определяем текущий сайдбар на основе URL
   // Для BrowserRouter используем pathname
   const currentPath = location.pathname;
-  const currentSidebar = currentPath === '/bento-visible' ? 'new' : 
+  const currentSidebar = currentPath === '/sidebar2' ? 'new' : 
                         currentPath === '/sidebar3' ? 'sidebar3' : 
                         currentPath === '/sidebar4' ? 'sidebar4' : 'old';
 
   const handleSidebarChange = (sidebar) => {
     // Навигация через URL вместо локального состояния
     if (sidebar === 'new') {
-      navigate('/bento-visible');
+      navigate('/sidebar2');
     } else if (sidebar === 'sidebar3') {
       navigate('/sidebar3');
     } else if (sidebar === 'sidebar4') {
@@ -56,11 +56,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/navbar-expand">
       <SidebarProvider>
         <Routes>
           <Route path="/" element={<AppContent />} />
-          <Route path="/bento-visible" element={<AppContent />} />
+          <Route path="/sidebar2" element={<AppContent />} />
           <Route path="/sidebar3" element={<AppContent />} />
           <Route path="/sidebar4" element={<AppContent />} />
           <Route path="*" element={<Navigate to="/" replace />} />

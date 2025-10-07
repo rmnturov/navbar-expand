@@ -91,8 +91,8 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
             Сайдбар 1
           </Link>
           <Link 
-            to="/bento-visible"
-            className={`nav-button ${location.pathname === '/bento-visible' ? 'active' : ''}`}
+            to="/sidebar2"
+            className={`nav-button ${location.pathname === '/sidebar2' ? 'active' : ''}`}
           >
             Сайдбар 2
           </Link>
