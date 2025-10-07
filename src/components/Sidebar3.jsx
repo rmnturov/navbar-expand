@@ -2,9 +2,9 @@ import React from "react";
 import { useSidebarContext } from "../contexts/SidebarContext";
 import KoobiqIcon from "./KoobiqIcon";
 import { menuItems, bottomMenuItems, Logo } from "../data/menuItems.jsx";
-import "./NewSidebar.css";
+import "./Sidebar3.css";
 
-const NewSidebar = () => {
+const Sidebar3 = () => {
   const {
     isPinned,
     isHovered,
@@ -20,47 +20,35 @@ const NewSidebar = () => {
     setActiveMenuItem(index);
   };
 
+  const handleTogglePin = () => {
+    if (isPinned) {
+      collapseMenu();
+    } else {
+      togglePin();
+    }
+  };
+
   return (
     <nav
-      className={`new-sidebar ${isPinned ? "pinned" : ""} ${
+      className={`sidebar3 ${isPinned ? "pinned" : ""} ${
         isHovered ? "hovered" : ""
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="new-sidebar-header">
-        {/* Первая строка: кнопки слева и справа */}
-        <div className="header-row-1">
-          {/* Кнопка с grid-squares в левом углу */}
-          <button className="grid-button">
-            <div className="icon-container">
-              <KoobiqIcon name="grid-squares" size={16} className="grid-icon" />
-            </div>
-          </button>
-
-          {/* Кнопка закрепить/свернуть в правом углу */}
-          <button
-            className="pin-button-header"
-            onClick={isPinned ? collapseMenu : togglePin}
-            title={isPinned ? "Свернуть меню" : "Закрепить меню"}
-          >
-            <div className="icon-container">
-              <KoobiqIcon 
-                name="pin" 
-                size={16} 
-                className={`pin-icon ${isPinned ? "hidden" : "visible"}`}
-              />
-              <KoobiqIcon 
-                name="chevron-double-left" 
-                size={16} 
-                className={`collapse-icon ${isPinned ? "visible" : "hidden"}`}
-              />
+      <div className="sidebar3-header">
+        {/* Пункт меню "Все приложения" */}
+        <div className="header-menu-item">
+          <button className=" menu-link all-apps-menu">
+            <div className="menu-link-inner">
+              <KoobiqIcon name="grid-squares" size={16} className="menu-icon" />
+              <span className="menu-text">Все приложения</span>
             </div>
           </button>
         </div>
-
-        {/* Вторая строка: логотип и название приложения */}
-        <div className="header-row-2">
+        
+        {/* Логотип и название приложения */}
+        <div className="header-row">
           <div className="logo-section-static">
             <Logo className="logo" />
             <span className="app-name-static">App Name</span>
@@ -91,7 +79,7 @@ const NewSidebar = () => {
       </ul>
 
       {/* Нижний блок пунктов меню */}
-      <ul className="new-sidebar-bottom-menu-list">
+      <ul className="sidebar3-bottom-menu-list">
         {bottomMenuItems.map((item, index) => {
           const bottomIndex = menuItems.length + index;
           return (
@@ -113,8 +101,30 @@ const NewSidebar = () => {
           );
         })}
       </ul>
+
+      {/* Пункт меню для развернуть/закрепить внизу */}
+      <div className="bottom-menu">
+        <div className="menu-item">
+          <button
+            className="menu-link toggle-pin-menu"
+            onClick={handleTogglePin}
+            title={isPinned ? "Свернуть меню" : "Закрепить меню"}
+          >
+            <div className="menu-link-inner">
+              <KoobiqIcon 
+                name={isPinned ? "chevron-double-left" : "chevron-double-right"} 
+                size={16} 
+                className="menu-icon" 
+              />
+              <span className="menu-text">
+                {isPinned ? "Свернуть" : "Развернуть"}
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
     </nav>
   );
 };
 
-export default NewSidebar;
+export default Sidebar3;
