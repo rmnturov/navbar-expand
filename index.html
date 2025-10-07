@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Navbar Expand - GitHub Pages</title>
-</head>
-<body>
-    <h1>🚀 Navbar Expand</h1>
-    <p>GitHub Pages работает! Сайт успешно задеплоен.</p>
-    <p><strong>URL:</strong> https://rmnturov.github.io/navbar-expand/</p>
-</body>
-</html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/navbar-expand/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вертикальное меню с разворачиванием</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script type="module" src="/src/main.jsx"></script>
+  </head>
+  <body class="kbq-light">
+    <div id="root"></div>
+    <script>
+      // GitHub Pages SPA redirect
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+  </body>
+</html><!-- Cache bust: Mon Oct  6 14:03:00 +07 2025 -->
