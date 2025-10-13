@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSidebarContext } from "../contexts/SidebarContext";
-import { useSidebar4Debug } from "../contexts/Sidebar4DebugContext";
+import { useSidebar5Debug } from "../contexts/Sidebar5DebugContext";
 import KoobiqIcon from "./KoobiqIcon";
 import { menuItems, bottomMenuItems, Logo } from "../data/menuItems.jsx";
-import "./Sidebar4.css";
+import "./Sidebar5.css";
 
-const Sidebar4 = () => {
+const Sidebar5 = () => {
   const {
     isPinned,
     isHovered,
@@ -17,7 +17,7 @@ const Sidebar4 = () => {
     setActiveMenuItem,
   } = useSidebarContext();
 
-  const { updateDebugInfo } = useSidebar4Debug();
+  const { updateDebugInfo } = useSidebar5Debug();
 
   const [showTooltips, setShowTooltips] = useState(false);
   const [hoveredItemIndex, setHoveredItemIndex] = useState(null);
@@ -290,13 +290,13 @@ const Sidebar4 = () => {
   return (
     <>
     <nav
-      className={`sidebar4 ${isPinned ? "pinned" : ""} ${
+      className={`sidebar5 ${isPinned ? "pinned" : ""} ${
         isHovered ? "hovered" : ""
       }`}
       onMouseEnter={handleSidebarMouseEnter}
       onMouseLeave={handleSidebarMouseLeave}
     >
-      <div className="sidebar4-header">
+      <div className="sidebar5-header">
         {/* Пункт меню "Все приложения" */}
         <div className="header-menu-item">
           <button 
@@ -348,7 +348,7 @@ const Sidebar4 = () => {
       </ul>
 
       {/* Нижний блок пунктов меню */}
-      <ul className="sidebar4-bottom-menu-list">
+      <ul className="sidebar5-bottom-menu-list">
         {bottomMenuItems.map((item, index) => {
           const bottomIndex = menuItems.length + index;
           return (
@@ -474,7 +474,7 @@ const Sidebar4 = () => {
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
       }}>
         <div style={{ marginBottom: '10px', fontWeight: 'bold', color: '#4CAF50' }}>
-          🔧 Sidebar4 Debug Info
+          🔧 Sidebar5 Debug Info
         </div>
         <div style={{ marginBottom: '5px' }}>
           <span style={{ color: '#FFC107' }}>Tooltips:</span> {showTooltips ? '✅' : '❌'}
@@ -502,4 +502,5 @@ const Sidebar4 = () => {
   );
 };
 
-export default Sidebar4;
+export default Sidebar5;
+

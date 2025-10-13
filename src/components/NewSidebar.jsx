@@ -79,7 +79,6 @@ const NewSidebar = () => {
                 className={`menu-link ${activeItem === index ? "active" : ""}`}
                 onClick={() => handleItemClick(index)}
                 aria-current={activeItem === index ? "page" : undefined}
-                title={item.text}
               >
                 <div className="menu-link-inner">
                   <KoobiqIcon name={item.icon} size={16} className="menu-icon" />
@@ -103,7 +102,6 @@ const NewSidebar = () => {
                 className={`menu-link ${activeItem === bottomIndex ? "active" : ""}`}
                 onClick={() => handleItemClick(bottomIndex)}
                 aria-current={activeItem === bottomIndex ? "page" : undefined}
-                title={item.text}
               >
                 <div className="menu-link-inner">
                   <KoobiqIcon name={item.icon} size={16} className="menu-icon" />
