@@ -4,9 +4,11 @@ import Sidebar from './components/Sidebar';
 import NewSidebar from './components/NewSidebar';
 import Sidebar3 from './components/Sidebar3';
 import Sidebar4 from './components/Sidebar4';
+import Sidebar5 from './components/Sidebar5';
 import MainContent from './components/MainContent';
 import { SidebarProvider, useSidebarContext } from './contexts/SidebarContext';
 import { Sidebar4DebugProvider } from './contexts/Sidebar4DebugContext';
+import { Sidebar5DebugProvider } from './contexts/Sidebar5DebugContext';
 import './App.css';
 
 function AppContent() {
@@ -28,7 +30,8 @@ function AppContent() {
   const currentPath = location.pathname;
   const currentSidebar = currentPath === '/sidebar2' ? 'new' : 
                         currentPath === '/sidebar3' ? 'sidebar3' : 
-                        currentPath === '/sidebar4' ? 'sidebar4' : 'old';
+                        currentPath === '/sidebar4' ? 'sidebar4' : 
+                        currentPath === '/sidebar5' ? 'sidebar5' : 'old';
 
   const handleSidebarChange = (sidebar) => {
     // Навигация через URL вместо локального состояния
@@ -38,6 +41,8 @@ function AppContent() {
       navigate('/sidebar3');
     } else if (sidebar === 'sidebar4') {
       navigate('/sidebar4');
+    } else if (sidebar === 'sidebar5') {
+      navigate('/sidebar5');
     } else {
       navigate('/');
     }
@@ -48,7 +53,8 @@ function AppContent() {
       {currentSidebar === 'old' ? <Sidebar /> : 
        currentSidebar === 'new' ? <NewSidebar /> : 
        currentSidebar === 'sidebar3' ? <Sidebar3 /> :
-       <Sidebar4DebugProvider><Sidebar4 /></Sidebar4DebugProvider>}
+       currentSidebar === 'sidebar4' ? <Sidebar4DebugProvider><Sidebar4 /></Sidebar4DebugProvider> :
+       <Sidebar5DebugProvider><Sidebar5 /></Sidebar5DebugProvider>}
       <MainContent onSidebarChange={handleSidebarChange} currentSidebar={currentSidebar} />
     </div>
   );
@@ -63,6 +69,7 @@ function App() {
           <Route path="/sidebar2" element={<AppContent />} />
           <Route path="/sidebar3" element={<AppContent />} />
           <Route path="/sidebar4" element={<AppContent />} />
+          <Route path="/sidebar5" element={<AppContent />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </SidebarProvider>

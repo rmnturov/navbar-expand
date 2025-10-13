@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSidebarContext } from '../contexts/SidebarContext';
 import { useSidebar4Debug } from '../contexts/Sidebar4DebugContext';
+import { useSidebar5Debug } from '../contexts/Sidebar5DebugContext';
 import Topbar from './Topbar';
 import './MainContent.css';
 
@@ -9,11 +10,16 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
   const { isPinned, isHovered } = useSidebarContext();
   const location = useLocation();
   
-  // Получаем отладочную информацию только для Sidebar4
+  // Получаем отладочную информацию для Sidebar4 и Sidebar5
   let debugInfo = null;
   try {
-    const { debugInfo: sidebar4DebugInfo } = useSidebar4Debug();
-    debugInfo = sidebar4DebugInfo;
+    if (currentSidebar === 'sidebar4') {
+      const { debugInfo: sidebar4DebugInfo } = useSidebar4Debug();
+      debugInfo = sidebar4DebugInfo;
+    } else if (currentSidebar === 'sidebar5') {
+      const { debugInfo: sidebar5DebugInfo } = useSidebar5Debug();
+      debugInfo = sidebar5DebugInfo;
+    }
   } catch (error) {
     // Контекст недоступен для других сайдбаров - это нормально
   }
@@ -22,8 +28,8 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
     <main className={`main-content ${isPinned ? 'pinned' : ''} ${isHovered && !isPinned ? 'hovered' : ''}`}>
       <Topbar />
       
-      {/* Отладочная панель для Sidebar4 */}
-      {currentSidebar === 'sidebar4' && debugInfo && (
+      {/* Отладочная панель для Sidebar4 и Sidebar5 */}
+      {(currentSidebar === 'sidebar4' || currentSidebar === 'sidebar5') && debugInfo && (
         <div style={{
           position: 'fixed',
           top: '80px',
@@ -42,7 +48,7 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
         }}>
           <div style={{ marginBottom: '10px', fontWeight: 'bold', color: '#4CAF50' }}>
-            🔧 Sidebar4 Debug Info
+            🔧 {currentSidebar === 'sidebar4' ? 'Sidebar4' : 'Sidebar5'} Debug Info
           </div>
           <div style={{ marginBottom: '5px' }}>
             <span style={{ color: '#FFC107' }}>Tooltips:</span> {debugInfo.showTooltips ? '✅' : '❌'}
@@ -108,6 +114,12 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
           >
             Сайдбар 4
           </Link>
+          <Link 
+            to="/sidebar5"
+            className={`nav-button ${location.pathname === '/sidebar5' ? 'active' : ''}`}
+          >
+            Сайдбар 5
+          </Link>
         </div>
 
         <div className="page-description">
@@ -142,10 +154,22 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
                 <li>Оформлен как обычный пункт меню с текстовыми подписями</li>
               </ul>
             </div>
-          ) : (
+          ) : currentSidebar === 'sidebar4' ? (
             <div>
               <h3>Сайдбар 4</h3>
               <p>Специальная версия с tooltips и floating кнопками. Свернутый навбар не разворачивается по hover, вместо этого показываются всплывающие подсказки.</p>
+              <ul>
+                <li>Свернутый навбар не разворачивается по hover</li>
+                <li>При наведении на элементы показываются всплывающие подсказки справа</li>
+                <li>Floating кнопка "Развернуть" появляется по hover на свернутое меню</li>
+                <li>Floating кнопка "Свернуть" появляется по hover на развернутое меню</li>
+                <li>В развернутом виде подсказки при наведении не показываются</li>
+              </ul>
+            </div>
+          ) : (
+            <div>
+              <h3>Сайдбар 5</h3>
+              <p>Копия четвертого навбара с теми же функциями tooltips и floating кнопок.</p>
               <ul>
                 <li>Свернутый навбар не разворачивается по hover</li>
                 <li>При наведении на элементы показываются всплывающие подсказки справа</li>

@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 // Параметры таймингов для анимаций сайдбара
 const TIMING_CONFIG = {
   // Задержка перед разворачиванием меню при наведении (мс)
-  HOVER_EXPAND_DELAY: 300,
+  HOVER_EXPAND_DELAY: 400,
   
   // Задержка перед сворачиванием меню при уходе курсора (мс)
   // Значение 0 для мгновенного сворачивания
