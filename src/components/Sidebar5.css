@@ -36,7 +36,7 @@
   /* Tooltip tokens */
   --tooltip-background: var(--kbq-background-card);
   --tooltip-text-color: var(--kbq-foreground-contrast-secondary);
-  --tooltip-padding: 8px 12px;
+  --tooltip-padding: 6px 12px;
   --tooltip-border-radius: 6px;
   --tooltip-font-size: var(--kbq-typography-text-normal-font-size);
   --tooltip-z-index: 1001;
