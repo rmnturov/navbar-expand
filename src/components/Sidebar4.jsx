@@ -454,50 +454,6 @@ const Sidebar4 = () => {
         </>
       )}
       </nav>
-      
-      {/* Отладочная панель */}
-      <div style={{
-        position: 'fixed',
-        top: '80px',
-        right: '20px',
-        background: 'rgba(0, 0, 0, 0.9)',
-        color: 'white',
-        padding: '15px',
-        borderRadius: '8px',
-        fontSize: '12px',
-        fontFamily: 'monospace',
-        zIndex: 9999,
-        minWidth: '250px',
-        maxWidth: '300px',
-        pointerEvents: 'none',
-        border: '1px solid #333',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
-      }}>
-        <div style={{ marginBottom: '10px', fontWeight: 'bold', color: '#4CAF50' }}>
-          🔧 Sidebar4 Debug Info
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <span style={{ color: '#FFC107' }}>Tooltips:</span> {showTooltips ? '✅' : '❌'}
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <span style={{ color: '#FFC107' }}>Hovered Item:</span> {hoveredItemIndex !== null ? hoveredItemIndex : 'none'}
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <span style={{ color: '#FFC107' }}>Quick Return:</span> {isQuickReturn ? '✅' : '❌'}
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <span style={{ color: '#FFC107' }}>Floating Button:</span> {showFloatingButton ? '✅' : '❌'}
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <span style={{ color: '#FFC107' }}>Pinned:</span> {isPinned ? '✅' : '❌'}
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <span style={{ color: '#FFC107' }}>Tooltip Delay Timer:</span> {tooltipDelayTimer.current ? '⏳' : '❌'}
-        </div>
-        <div style={{ marginBottom: '5px' }}>
-          <span style={{ color: '#FFC107' }}>Quick Return Timer:</span> {quickReturnTimer.current ? '⏳' : '❌'}
-        </div>
-      </div>
     </>
   );
 };
