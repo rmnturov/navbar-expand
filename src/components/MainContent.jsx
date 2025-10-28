@@ -94,19 +94,19 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
             to="/sidebar2"
             className={`nav-button ${location.pathname === '/sidebar2' ? 'active' : ''}`}
           >
-            Сайдбар 2
+            Сайдбар 1
           </Link>
           <Link 
             to="/sidebar4"
             className={`nav-button ${location.pathname === '/sidebar4' ? 'active' : ''}`}
           >
-            Сайдбар 4
+            Сайдбар 2
           </Link>
           <Link 
             to="/sidebar6"
             className={`nav-button ${location.pathname === '/sidebar6' ? 'active' : ''}`}
           >
-            Сайдбар 6
+            Сайдбар 3
           </Link>
         </div>
 
@@ -123,7 +123,7 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
             </div>
           ) : currentSidebar === 'new' ? (
             <div>
-              <h3>Сайдбар 2</h3>
+              <h3>Сайдбар 1</h3>
               <p>Версия с явной шапкой и стабильной зоной управления: слева переключатель приложений, справа — кнопка закрепить/свернуть; ниже — логотип и название приложения.</p>
               <ul>
                 <li>Шапка: bento-кнопка слева; кнопка «закрепить/свернуть» в правом верхнем углу.</li>
@@ -146,7 +146,7 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
             </div>
           ) : currentSidebar === 'sidebar4' ? (
             <div>
-              <h3>Сайдбар 4</h3>
+              <h3>Сайдбар 2</h3>
               <p>Специальная версия с tooltips и плавающими кнопками. В свернутом состоянии панель не расширяется по hover — показываются контекстные подсказки.</p>
               <ul>
                 <li>Свернутый навбар не разворачивается по hover</li>
@@ -171,7 +171,7 @@ const MainContent = ({ onSidebarChange, currentSidebar }) => {
             </div>
           ) : (
             <div>
-              <h3>Сайдбар 6</h3>
+              <h3>Сайдбар 3</h3>
               <p>Компактный сайдбар с умными тултипами и плавающими кнопками управления.</p>
               <ul>
                 <li>Тултипы только в свернутом состоянии; показываются по наведению на пункт</li>
