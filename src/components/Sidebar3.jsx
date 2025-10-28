@@ -41,7 +41,7 @@ const Sidebar3 = () => {
         <div className="header-menu-item">
           <button className=" menu-link all-apps-menu">
             <div className="menu-link-inner">
-              <KoobiqIcon name="grid-squares" size={16} className="menu-icon" />
+              <KoobiqIcon name="bento-menu" size={16} className="menu-icon" />
               <span className="menu-text">Все приложения</span>
             </div>
           </button>

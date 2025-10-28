@@ -36,7 +36,7 @@ const Sidebar = () => {
               <span className="app-name">App Name</span>
             </div>
             <div className="hint-section">
-              <KoobiqIcon name="grid-squares" size={16} className="hint-icon" />
+              <KoobiqIcon name="bento-menu" size={16} className="hint-icon" />
               <span className="hint-text">Все приложения</span>
             </div>
           </div>

@@ -113,7 +113,7 @@ const Sidebar6 = () => {
             onBlur={() => onItemBlur("all-apps")}
           >
             <div className="menu-link-inner">
-              <KoobiqIcon name="grid-squares" size={16} className="menu-icon" />
+              <KoobiqIcon name="bento-menu" size={16} className="menu-icon" />
               <span className="menu-text">Все приложения</span>
             </div>
             {!isPinned && (

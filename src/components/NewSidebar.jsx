@@ -31,10 +31,10 @@ const NewSidebar = () => {
       <div className="new-sidebar-header">
         {/* Первая строка: кнопки слева и справа */}
         <div className="header-row-1">
-          {/* Кнопка с grid-squares в левом углу */}
+          {/* Кнопка с bento-menu в левом углу */}
           <button className="grid-button">
             <div className="icon-container">
-              <KoobiqIcon name="grid-squares" size={16} className="grid-icon" />
+              <KoobiqIcon name="bento-menu" size={16} className="grid-icon" />
               <span className="grid-text">Все приложения</span>
             </div>
           </button>
